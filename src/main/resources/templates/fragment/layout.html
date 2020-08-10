@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+	<head th:fragment="head(title, links, scripts, description)">
+    	<meta charset="utf-8">
+    	<title th:replace="${title}"></title>
+    	<meta name="description" th:content="${description}">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+		<!-- UIkit CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css" />
+		<link rel="stylesheet" href="css/style.sass">
+		<th:block th:replace="${links}">
+		<th:block th:replace="${scripts}">
+	</head>
+	<body class="">
+		<header th:fragment="top">
+		
+		</header>
+		
+		<footer th:fragment="">
+		
+		</footer>
+	</body>
+	<div th:fragment="scripts">
+		<!-- UIkit JS -->
+		<script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"></script>
+	</div>
+
+</html>
