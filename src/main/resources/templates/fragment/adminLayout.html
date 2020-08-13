@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+
+	<body class="">
+		<header th:fragment="header_admin"></header>
+		<div th:fragment="message">		
+			<div th:if="${sucessMessage}" class="uk-alert-primary" uk-alert>
+    			<a class="uk-alert-close" uk-close></a>
+   				<p th:text="${sucessMessage}">Sucess</p>
+			</div>
+			<div th:if="${errorMessage}" class="uk-alert-danger" uk-alert>
+    			<a class="uk-alert-close" uk-close></a>
+   				<p th:text="${errorMessage}">Erreur</p>
+			</div>
+		</div>
+	</body>
+</html>

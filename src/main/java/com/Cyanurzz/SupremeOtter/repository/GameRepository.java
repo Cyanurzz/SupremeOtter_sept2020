@@ -13,6 +13,6 @@ import com.Cyanurzz.SupremeOtter.entity.Game;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer> {
 
-	//@Query("SELECT g FROM Game g JOIN g.tags t WHERE t = LOWER(:tag)")
-	//List<Game> retrieveByTag(@Param("tag") String tag);
+	@Query("SELECT g FROM Game g JOIN g.tags t WHERE t = LOWER(:tag)")
+	List<Game> retrieveByTag(@Param("tag") String tag);
 }

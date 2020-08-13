@@ -8,16 +8,46 @@
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 		<!-- UIkit CSS -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css" />
-		<link rel="stylesheet" href="css/style.sass">
 		<th:block th:replace="${links}">
 		<th:block th:replace="${scripts}">
 	</head>
 	<body class="">
-		<header th:fragment="top">
-		
-		</header>
-		
-		<footer th:fragment="">
+	<header th:fragment="top">
+		<nav class="uk-navbar-container" uk-navbar>
+
+			<div class="uk-navbar-left">
+				<ul class="uk-navbar-nav">
+					<li class="uk-active"><a href="/">Supreme Otter</a></li>
+					<li><a href="#">Games</a></li>
+				</ul>
+			</div>
+			<div class="uk-navbar-right">
+
+				<ul class="uk-navbar-nav">
+					<li><a href="#" data-th-text="#{home.changelanguage}"></a>
+						<div class="uk-navbar-dropdown">
+							<ul class="uk-nav uk-navbar-dropdown-nav">
+								<li><a href="?lang=en" data-th-text="#{home.lang.en}"></a></li>
+								<li><a href="?lang=fr" data-th-text="#{home.lang.fr}"></a></li>
+								<li><a href="?lang=mrl" data-th-text="#{home.lang.mrl}"></a></li>
+								<li><a href="?lang=sq" data-th-text="#{home.lang.sq}"></a></li>
+							</ul>
+						</div>
+					</li>
+					<li><a href="#">Admin</a>
+						<div class="uk-navbar-dropdown">
+							<ul class="uk-nav uk-navbar-dropdown-nav">
+								<li><a href="/admin/games">Games</a></li>
+								<li><a href="/admin/platforms">Platforms</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<footer th:fragment="">
 		
 		</footer>
 	</body>

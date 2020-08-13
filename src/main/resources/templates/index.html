@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
-	<head th:replace="fragment/layout.html :: head(~{::title},~{::description},~{},~{})">
+	<head th:replace="fragment/layout.html :: head(~{::title},~{},~{},~{::description})">
 		<title>Supreme Otter | Home</title>
 		<meta name="description" content="">
 	</head>
-	<body class="container">
-		<header th:replace="fragment/layout.htm :: header"></header>
+	
+	
+	<body class="">
+		<header th:replace="fragment/layout.html :: top"></header>
+		<main class="uk-container">
+			<h2 data-th-text="#{home.welcome}"></h2>
+			<p data-th-text="#{home.info}"></p>
+		</main>
+		<footer>
+		
+		</footer>
+			
 	</body>
 	<div th:replace="fragment/layout.html :: scripts"></div>
 </html>

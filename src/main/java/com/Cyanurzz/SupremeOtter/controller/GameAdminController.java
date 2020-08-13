@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Cyanurzz.SupremeOtter.entity.Game;
+import com.Cyanurzz.SupremeOtter.repository.DescriptorRepository;
 import com.Cyanurzz.SupremeOtter.repository.GameRepository;
-
+import com.Cyanurzz.SupremeOtter.repository.GenderRepository;
+import com.Cyanurzz.SupremeOtter.repository.PlatformRepository;
+import com.Cyanurzz.SupremeOtter.repository.TagRepository;
 
 @RequestMapping("/admin/games")
 @Controller
@@ -25,14 +28,25 @@ public class GameAdminController {
 	@Autowired
 	private GameRepository gameRepository;
 	
+	@Autowired
+	private TagRepository tagRepository;
+	
+	@Autowired
+	private PlatformRepository platformRepository;
+	
+	@Autowired
+	private GenderRepository genderRepository;
+	
+	@Autowired
+	private DescriptorRepository descriptorRepository;
+	
 	@GetMapping
 	public String toGamesAdmin(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
-		
 		return "gameAdmin";
 	}
 	
-	@GetMapping("/admin/game/update")
+	@GetMapping("/update")
 	public String toGameAdminUpdate(Model model, @RequestParam(required= false) Integer id) {
 		
 		Game game = new Game();
@@ -43,15 +57,19 @@ public class GameAdminController {
 			}
 		}
 		
+		model.addAttribute("tags", tagRepository.findAll());
+		model.addAttribute("descriptors", descriptorRepository.findAll());
+		model.addAttribute("platforms", platformRepository.findAll());
+		model.addAttribute("genders", genderRepository.findAll());
 		model.addAttribute("game", game);
 		
 		return "gameAdminUpdate";
 	}
 	
-	@PostMapping("/admin/update")
+	@PostMapping("/update")
 	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid  Game game, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			return "gameAdimUpdate";
+			return "gameAdminUpdate";
 		}
 		if( id == null) {
 			
