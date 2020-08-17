@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Cyanurzz.SupremeOtter.entity.Game;
+import com.Cyanurzz.SupremeOtter.repository.ContentRepository;
 import com.Cyanurzz.SupremeOtter.repository.DescriptorRepository;
 import com.Cyanurzz.SupremeOtter.repository.GameRepository;
 import com.Cyanurzz.SupremeOtter.repository.GenderRepository;
@@ -40,6 +41,9 @@ public class GameAdminController {
 	@Autowired
 	private DescriptorRepository descriptorRepository;
 	
+	@Autowired
+	private ContentRepository contentRepository;
+	
 	@GetMapping
 	public String toGamesAdmin(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
@@ -54,6 +58,10 @@ public class GameAdminController {
 			Optional<Game> optionalGame = gameRepository.findById(id);
 			if (optionalGame.isPresent()) {
 				game = optionalGame.get();
+				
+				if (!game.getMultiLangContents().isEmpty()) {
+					model.addAttribute("contents", contentRepository.findByGame(game));
+				}
 			}
 		}
 		

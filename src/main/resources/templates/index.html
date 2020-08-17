@@ -11,6 +11,9 @@
 		<main class="uk-container">
 			<h2 data-th-text="#{home.welcome}"></h2>
 			<p data-th-text="#{home.info}"></p>
+			
+			<h3 th:text="${game.title}"></h3>
+			<h3 th:text="${game.multiLangContents[0].description}"></h3>
 		</main>
 		<footer>
 		

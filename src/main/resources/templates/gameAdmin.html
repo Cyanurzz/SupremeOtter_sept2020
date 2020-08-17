@@ -19,7 +19,6 @@
 		            <th class="uk-table-shrink">id</th>
 		            <th>Titre</th>
 		            <th>Banniere</th>
-		            <th>Contenu</th>
 		            <th>Date de Sortie</th>
 		            <th>Classification</th>
 		            <th>Descripteurs</th>
@@ -33,7 +32,6 @@
 		        <tr th:each="game : ${games}">
 		            <td th:text="${game.id}"></td>
 		            <td th:text="${game.title}">Table Data</td>
-		            <td></td>
 		            <td></td>
 		            <!-- <td><img th:data-src="${article.picture}" width="150" th:alt="|visuel ${article.title}|" uk-img></td> -->
 		            <td th:text="${#dates.format(game.releaseDate,'dd MMM yyyy')}">Table Data</td>

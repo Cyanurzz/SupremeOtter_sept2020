@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+	<head th:replace="fragment/layout.html :: head(~{::title},~{},~{},~{::description})">
+		<title>Supreme Otter | Modifier le contenue</title>
+		<meta name="description" content="">
+	</head>
+	<body class="uk-container">
+		<header th:replace="fragment/adminLayout.html :: header_admin"> </header>
+			<div th:replace="fragment/adminLayout.html :: message"> </div>
+			<h1 class="uk-text-large"  th:text="${content.id} ? 'Page de Modifications' : 'Page de Creation'"> </h1>
+			<h2 th:text="${game.title + game.id}"></h2>
+			<form method="post" th:action="@{/admin/games/update/contents/update(game=${game.id})}" th:object="${content}" class="uk-grid-small uk-form" uk-grid>
+				<input name="id" th:field="*{id}" type="hidden">
+				<input name="game" th:field="*{game.id}" type="hidden">
+				<div class="uk-width-1-3">
+			   		<label for="local">Langue</label>
+            		<select class="uk-select uk-input uk-form-large" th:field="*{locale}">
+                		<option value="fr">Français</option>
+                		<option value="en">Anglais</option>
+                		<option value="sq">Squanch</option>
+                		<option value="mrl">Murloc</option>
+           			</select>
+        		</div>
+			    <div class="uk-width-1-1">
+			        <label class="uk-form-label" for="description">Description *</label> 
+					<textarea id="description" name="description" placeholder="Bla" rows="5" th:field="*{description}" type="text" class="uk-textarea uk-form-large uk-width"></textarea>
+					<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="uk-alert-danger" uk-alert></div>
+			    </div>
+
+				<div class="uk-margin uk-margin-auto-left uk-text-center">
+					<input type="submit" th:value="${content.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
+					<a href="/admin/games" class="uk-button uk-button-danger">Retour en arriere</a>
+				</div>
+			
+		</form>
+		
+	</body>
+	<div th:replace="fragment/layout.html :: scripts"></div>
+</html>

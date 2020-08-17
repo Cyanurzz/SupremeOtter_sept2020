@@ -12,11 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.Cyanurzz.SupremeOtter.entity.contentGame.Content;
 import com.Cyanurzz.SupremeOtter.entity.contentGame.Descriptor;
 import com.Cyanurzz.SupremeOtter.entity.contentGame.Gender;
 import com.Cyanurzz.SupremeOtter.entity.contentGame.Platform;
@@ -53,6 +55,10 @@ public class Game {
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "descriptors_game", joinColumns = @JoinColumn(name = "game_id") , inverseJoinColumns = @JoinColumn(name = "descriptor_id"))
 	List<Descriptor> descriptors = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "game", cascade = {  CascadeType.ALL  })
+	private List<Content> multiLangContents;
+	
 	
 	public Game() {
 		super();
@@ -124,7 +130,13 @@ public class Game {
 		this.descriptors = descriptors;
 	}
 
-	
+	public List<Content> getMultiLangContents() {
+		return multiLangContents;
+	}
+
+	public void setMultiLangContent(List<Content> multiLangContents) {
+		this.multiLangContents = multiLangContents;
+	}
 	
 	
 }

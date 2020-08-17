@@ -6,8 +6,8 @@
 	</head>
 	<body class="uk-container">
 		<header th:replace="fragment/adminLayout.html :: header_admin"> </header>
-			<div th:replace="fragment/adminLayout.html :: message"> </div>
 			<h1 class="uk-text-large"  th:text="${game.id} ? 'Page de Modifications' : 'Page de Creation'"> </h1>
+			<div th:replace="fragment/adminLayout.html :: message"> </div>
 			<form method="post" th:action="@{/admin/games/update}" th:object="${game}" class="uk-grid-small uk-form" uk-grid>
 				<input name="id" th:field="*{id}" type="hidden">
 			    <div class="uk-width-1-1">
@@ -62,14 +62,43 @@
 					<input id="tags" name="tags" th:field="*{tags}" type="text" class="uk-input uk-form-large">
 					<div th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}" class="uk-alert-danger" uk-alert></div>
 			    </div>
-				
+			    
+			    <div class="uk-width-1-1" th:if="${game.id != null}">
+			    	<a class="uk-link-heading" th:href="@{/admin/games/update/contents/update(game=${game.id})}"><span uk-icon="plus"></span>  Ajouter une nouvelle description</a>
+			    	<table class="uk-table uk-table-hover uk-table-divider uk-card uk-card-default uk-card-body">
+					    <thead>
+					        <tr>
+					            <th class="">id</th>
+					            <th>Langue</th>
+					            <th>Cle valeur</th>
+					            <th>Contenue</th>
+					            <th></th>
+					        </tr>
+					    </thead>
+					    <tbody>
+					        <tr th:each="content : ${contents}">
+					            <td th:text="${content.id}"></td>
+					            <td th:text="${content.locale}"></td>
+					            <td th:text="${content.key}"></td>
+					            <td th:text="${content.description}"></td>
+					            <td>
+					            	<ul class="uk-iconnav uk-iconnav-vertical">
+					            		<li><a th:href="@{/admin/games/update/contents/update(id=${content.id},game=${game.id})}" uk-icon="icon: file-edit"></a></li>
+					            		<li><a th:href="@{/admin/games/update/contents/delete(id=${content.id},game=${game.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce jeux ?')" uk-icon="icon: trash"></a></li>
+					            	</ul>
+					            </td>
+					        </tr>
+					    </tbody>
+					</table>
+			    </div>
+
 				<div class="uk-margin uk-margin-auto-left uk-text-center">
 					<input type="submit" th:value="${game.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
 					<a href="/admin/games" class="uk-button uk-button-danger">Retour en arriere</a>
 				</div>
 			
 		</form>
-
+		
 	</body>
 	<div th:replace="fragment/layout.html :: scripts"></div>
 </html>
