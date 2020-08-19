@@ -47,7 +47,10 @@
 		            </td>
 		            <td>
 		            	<ul>
-		            		<li th:each="platform: ${game.platforms}" th:text="${platform.name}"></li>
+		            		<li th:each="platform: ${game.platforms}">
+		            			<p th:text="${platform.name}"></p>
+		            			<img th:data-src="${platform.img}" height="87px" width="100px" th:alt="|available on ${platform.name}|">
+		            		</li>
 		            	</ul>
 		            </td>
 		            <td>

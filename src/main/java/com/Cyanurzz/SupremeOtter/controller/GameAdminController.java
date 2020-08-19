@@ -1,5 +1,7 @@
 package com.Cyanurzz.SupremeOtter.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Cyanurzz.SupremeOtter.entity.Game;
-import com.Cyanurzz.SupremeOtter.repository.ContentRepository;
+import com.Cyanurzz.SupremeOtter.entity.Tag;
+import com.Cyanurzz.SupremeOtter.entity.contentGame.Descriptor;
+import com.Cyanurzz.SupremeOtter.entity.contentGame.Gender;
+import com.Cyanurzz.SupremeOtter.entity.contentGame.Platform;
 import com.Cyanurzz.SupremeOtter.repository.DescriptorRepository;
 import com.Cyanurzz.SupremeOtter.repository.GameRepository;
 import com.Cyanurzz.SupremeOtter.repository.GenderRepository;
@@ -41,9 +46,6 @@ public class GameAdminController {
 	@Autowired
 	private DescriptorRepository descriptorRepository;
 	
-	@Autowired
-	private ContentRepository contentRepository;
-	
 	@GetMapping
 	public String toGamesAdmin(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
@@ -58,10 +60,6 @@ public class GameAdminController {
 			Optional<Game> optionalGame = gameRepository.findById(id);
 			if (optionalGame.isPresent()) {
 				game = optionalGame.get();
-				
-				if (!game.getMultiLangContents().isEmpty()) {
-					model.addAttribute("contents", contentRepository.findByGame(game));
-				}
 			}
 		}
 		
@@ -76,16 +74,36 @@ public class GameAdminController {
 	
 	@PostMapping("/update")
 	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid  Game game, BindingResult bindingResult) {
+		
+		List<Tag> tags = new ArrayList(); //Initialize Tag lis
+		
 		if (bindingResult.hasErrors()) {
 			return "gameAdminUpdate";
 		}
-		if( id == null) {
+		if( id == null) { // IF id is null create tag with the game name and add it to the empty list
 			
+			Tag tag = new Tag();
+			tag.setName(game.getTitle().toLowerCase());
+			tagRepository.save(tag);
+			tags.add(tag);
 			redirAttrs.addFlashAttribute("sucessMessage", "Nouveau jeu créé");
 		}else {
-			
 			redirAttrs.addFlashAttribute("sucessMessage", "Le jeux à été modifié");
 		}
+		
+		// Then for each under category find the tag and push it into the list ... by this way search info will be much easier
+		for(Platform platform: game.getPlatforms()) {	
+			tags.add(tagRepository.findByName(platform.getName().toLowerCase()));
+		}
+		for(Descriptor descriptor: game.getDescriptors()) {
+			tags.add(tagRepository.findByName(descriptor.getName().toLowerCase()));
+		}
+		for(Gender gender: game.getGenders()) {
+			tags.add(tagRepository.findByName(gender.getName().toLowerCase()));
+		}
+		game.setTags(tags); // Then Attribute the list to the game
+	
+		
 		gameRepository.save(game);
 		
 		return "redirect:/admin/games";

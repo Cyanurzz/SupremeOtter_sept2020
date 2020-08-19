@@ -17,7 +17,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public String welcome(Model model) {
 		
-		model.addAttribute("game", gameRepository.findById(1).get());
+		model.addAttribute("game", gameRepository.findAll());
 		return "index";
 	}
 

@@ -24,7 +24,9 @@ public class Platform {
 	private String name;
 	
 	@ManyToMany(mappedBy = "platforms")
-	List<Game> games= new ArrayList<>();
+	private List<Game> games= new ArrayList<>();
+	
+	private String img;
 	
 	
 	public Platform() {
@@ -56,6 +58,16 @@ public class Platform {
 
 	public void setGames(List<Game> games) {
 		this.games = games;
+	}
+
+
+	public String getImg() {
+		return img;
+	}
+
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 	

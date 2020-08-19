@@ -1,13 +1,13 @@
-INSERT INTO platform (name) VALUES 
-('Linux'),
-('Mac Osx'),
-('Windows'),
-('Nintendo Switch'),
-('Nintendo 3DS'),
-('Playstation 4'),
-('Xbox One'),
-('Android'),
-('IOS');
+INSERT INTO platform (name, img) VALUES 
+('Linux', "svg/platform/ubuntu.svg"),
+('Mac Osx', "svg/platform/apple.svg"),
+('Windows', "svg/platform/windows.svg"),
+('Nintendo Switch', "svg/platform/switch.svg"),
+('Nintendo 3DS', "svg/platform/3ds.svg"),
+('Playstation 4', "svg/platform/playstation.svg"),
+('Xbox One', "svg/platform/xbox.svg"),
+('Android', "svg/platform/android.svg"),
+('IOS', "svg/platform/ios.svg");
 
 INSERT INTO gender (name) VALUES 
 ('Action'),
@@ -51,42 +51,31 @@ INSERT INTO gender_game(game_id, gender_id) VALUES
 (1, 6),
 (1, 2);
 
-INSERT INTO content(description, locale, game_id) VALUES 
-("Mrglrglrglrgl mlrglgmrlgmglllgrmgmrlgrmg grmlgrgrlgm glrgmrgl rmglrgglglrmg lglrmglrg", "mrl", 1),
-("Blobfish for breakfast et un jeu de platform ou l'on incarne un blob fish sencé passer a la poil", "fr", 1),
-("Bfb is a platform game in wish you played a blobfish who run for they're life", "en", 1),
-("Bfb is a platform fame in wish you squanched a blobfish who squanch for they're life", "sq", 1),
-("HitLama is a platform fame in wish you squanched a Killer lama who squanch for they're life", "sq", 2);
-
-INSERT INTO languages (id, locale, messagekey,messagecontent) VALUES
-(1, 'en', 'home.welcome','Welcome'),
-(2, 'en', 'home.info','This page is displayed in English.'),
-(3, 'en', 'home.changelanguage','English'),
-(4, 'en', 'home.lang.en','English'),
-(5, 'en', 'home.lang.mrl','Murloc'),
-(26, 'en', 'home.lang.sq','Squanch'),
-(7, 'en', 'home.lang.fr','French'),
-
-(8, 'mrl', 'home.welcome','mrglmrlgmglgllrmg'),
-(9, 'mrl', 'home.info','Mrlg mlrgglrlrlgl mrlgmrlgmmrlgmggl  rlgmrgl .'),
-(10, 'mrl', 'home.changelanguage','Mgrlgrl'),
-(11, 'mrl', 'home.lang.en','mlrglglgr'),
-(12, 'mrl', 'home.lang.mrl','Mrlglrmlgr'),
-(28, 'mrl', 'home.lang.sq','Mrgrlgrlgrr'),
-(13, 'mrl', 'home.lang.fr','Mglrlrl'),
-
-(14, 'fr', 'home.welcome','Bienvenue'),
-(15, 'fr', 'home.info','Cette page est écrite en français.'),
-(16, 'fr', 'home.changelanguage','Français'),
-(17, 'fr', 'home.lang.en','Anglais'),
-(18, 'fr', 'home.lang.mrl','Murloc'),
-(27, 'fr', 'home.lang.sq','Squanch'),
-(19, 'fr', 'home.lang.fr','Français'),
-
-(20, 'sq', 'home.welcome','Weclome'),
-(21, 'sq', 'home.info','This page is squanched in Squanch.'),
-(22, 'sq', 'home.changelanguage','Squanch'),
-(23, 'sq', 'home.lang.en','English'),
-(24, 'sq', 'home.lang.mrl','Murloc'),
-(25, 'sq', 'home.lang.sq','Squanch'),
-(29, 'sq', 'home.lang.fr','French');
+INSERT INTO tag(name) VALUES
+('blobfish for breakfast'),
+('hitlama'),
+('violence'),
+('bad language'),
+('fear'),
+('gamebling'),
+('sex'),
+('drugs'),
+('discrimination'),
+('action'),
+('combat'),
+('beat them all'),
+('tir'),
+('shoot them up'),
+('fps'),
+('tps'),
+('rail shooter'),
+('Adventure'),
+('linux'),
+('mac osx'),
+('windows'),
+('nintendo switch'),
+('nintendo 3ds'),
+('playstation 4'),
+('xbox One'),
+('android'),
+('ios');

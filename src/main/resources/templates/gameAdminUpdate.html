@@ -62,34 +62,10 @@
 					<input id="tags" name="tags" th:field="*{tags}" type="text" class="uk-input uk-form-large">
 					<div th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}" class="uk-alert-danger" uk-alert></div>
 			    </div>
-			    
-			    <div class="uk-width-1-1" th:if="${game.id != null}">
-			    	<a class="uk-link-heading" th:href="@{/admin/games/update/contents/update(game=${game.id})}"><span uk-icon="plus"></span>  Ajouter une nouvelle description</a>
-			    	<table class="uk-table uk-table-hover uk-table-divider uk-card uk-card-default uk-card-body">
-					    <thead>
-					        <tr>
-					            <th class="">id</th>
-					            <th>Langue</th>
-					            <th>Cle valeur</th>
-					            <th>Contenue</th>
-					            <th></th>
-					        </tr>
-					    </thead>
-					    <tbody>
-					        <tr th:each="content : ${contents}">
-					            <td th:text="${content.id}"></td>
-					            <td th:text="${content.locale}"></td>
-					            <td th:text="${content.key}"></td>
-					            <td th:text="${content.description}"></td>
-					            <td>
-					            	<ul class="uk-iconnav uk-iconnav-vertical">
-					            		<li><a th:href="@{/admin/games/update/contents/update(id=${content.id},game=${game.id})}" uk-icon="icon: file-edit"></a></li>
-					            		<li><a th:href="@{/admin/games/update/contents/delete(id=${content.id},game=${game.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce jeux ?')" uk-icon="icon: trash"></a></li>
-					            	</ul>
-					            </td>
-					        </tr>
-					    </tbody>
-					</table>
+			    <div class="uk-width-">
+			        <label class="uk-form-label" for = "description">Descrtition</label>
+					<textarea id="description" name="description" th:field="*{description}" rows=8 class="uk-textarea uk-form-large"></textarea>
+					<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="uk-alert-danger" uk-alert></div>
 			    </div>
 
 				<div class="uk-margin uk-margin-auto-left uk-text-center">
