@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +15,7 @@ public class Language {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
 	@Column
@@ -23,6 +26,10 @@ public class Language {
 
 	@Column(name = "messagecontent")
 	private String content;
+	
+	@ManyToOne
+    @JoinColumn(name="game_id", nullable=true)
+	Game game;
 
 	public Integer getId() {
 		return id;
@@ -54,6 +61,14 @@ public class Language {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public Game getGames() {
+		return game;
+	}
+
+	public void setGames(Game games) {
+		this.game = games;
 	}
 
 }

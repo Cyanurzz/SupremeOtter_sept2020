@@ -12,16 +12,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.Cyanurzz.SupremeOtter.entity.contentGame.Content;
 import com.Cyanurzz.SupremeOtter.entity.contentGame.Descriptor;
 import com.Cyanurzz.SupremeOtter.entity.contentGame.Gender;
 import com.Cyanurzz.SupremeOtter.entity.contentGame.Platform;
+
 @Entity
 public class Game {
 
@@ -56,8 +57,9 @@ public class Game {
 	@JoinTable(name = "descriptors_game", joinColumns = @JoinColumn(name = "game_id") , inverseJoinColumns = @JoinColumn(name = "descriptor_id"))
 	List<Descriptor> descriptors = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "game", cascade = {  CascadeType.ALL  })
-	private List<Content> multiLangContents;
+	@OneToMany(mappedBy = "game")
+	List<Language> content = new ArrayList<>();
+	
 	
 	
 	public Game() {
@@ -130,13 +132,11 @@ public class Game {
 		this.descriptors = descriptors;
 	}
 
-	public List<Content> getMultiLangContents() {
-		return multiLangContents;
+	public List<Language> getContent() {
+		return content;
 	}
 
-	public void setMultiLangContent(List<Content> multiLangContents) {
-		this.multiLangContents = multiLangContents;
+	public void setContent(List<Language> content) {
+		this.content = content;
 	}
-	
-	
 }

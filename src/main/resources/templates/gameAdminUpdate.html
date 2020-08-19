@@ -64,7 +64,7 @@
 			    </div>
 			    
 			    <div class="uk-width-1-1" th:if="${game.id != null}">
-			    	<a class="uk-link-heading" th:href="@{/admin/games/update/contents/update(game=${game.id})}"><span uk-icon="plus"></span>  Ajouter une nouvelle description</a>
+			    	<a class="uk-link-heading" th:href=@{/admin/games/content/update(game=${game.id})}><span uk-icon="plus"></span>  Ajouter une nouvelle description</a>
 			    	<table class="uk-table uk-table-hover uk-table-divider uk-card uk-card-default uk-card-body">
 					    <thead>
 					        <tr>
@@ -76,15 +76,15 @@
 					        </tr>
 					    </thead>
 					    <tbody>
-					        <tr th:each="content : ${contents}">
-					            <td th:text="${content.id}"></td>
-					            <td th:text="${content.locale}"></td>
-					            <td th:text="${content.key}"></td>
-					            <td th:text="${content.description}"></td>
+					        <tr>
+					            <td></td>
+					            <td></td>
+					            <td></td>
+					            <td></td>
 					            <td>
 					            	<ul class="uk-iconnav uk-iconnav-vertical">
-					            		<li><a th:href="@{/admin/games/update/contents/update(id=${content.id},game=${game.id})}" uk-icon="icon: file-edit"></a></li>
-					            		<li><a th:href="@{/admin/games/update/contents/delete(id=${content.id},game=${game.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce jeux ?')" uk-icon="icon: trash"></a></li>
+					            		<li><a uk-icon="icon: file-edit"></a></li>
+					            		<li><a onclick="return confirm('Etes vous sûr de vouloir supprimer ce jeux ?')" uk-icon="icon: trash"></a></li>
 					            	</ul>
 					            </td>
 					        </tr>

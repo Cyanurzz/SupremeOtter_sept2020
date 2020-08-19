@@ -50,14 +50,14 @@ INSERT INTO gender_game(game_id, gender_id) VALUES
 (1, 4),
 (1, 6),
 (1, 2);
-
+/*
 INSERT INTO content(description, locale, game_id) VALUES 
 ("Mrglrglrglrgl mlrglgmrlgmglllgrmgmrlgrmg grmlgrgrlgm glrgmrgl rmglrgglglrmg lglrmglrg", "mrl", 1),
 ("Blobfish for breakfast et un jeu de platform ou l'on incarne un blob fish sencé passer a la poil", "fr", 1),
 ("Bfb is a platform game in wish you played a blobfish who run for they're life", "en", 1),
 ("Bfb is a platform fame in wish you squanched a blobfish who squanch for they're life", "sq", 1),
-("HitLama is a platform fame in wish you squanched a Killer lama who squanch for they're life", "sq", 2);
-
+("HitLama is a platform fame in wish you squanched a Killer lama who squanch for they're life", "sq", 2);*/
+/*
 INSERT INTO languages (id, locale, messagekey,messagecontent) VALUES
 (1, 'en', 'home.welcome','Welcome'),
 (2, 'en', 'home.info','This page is displayed in English.'),
@@ -90,3 +90,5 @@ INSERT INTO languages (id, locale, messagekey,messagecontent) VALUES
 (24, 'sq', 'home.lang.mrl','Murloc'),
 (25, 'sq', 'home.lang.sq','Squanch'),
 (29, 'sq', 'home.lang.fr','French');
+
+*/
