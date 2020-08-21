@@ -8,7 +8,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 		<!-- UIkit CSS -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css" />
-	    <link rel="stylesheet" href="/css/adminlayout.css">
+	    <link rel="stylesheet" href="/css/adminLayout.css">
 	</head>
 	<body class="">
 		<div th:fragment="message">		
@@ -25,9 +25,10 @@
 		<div th:fragment="header" class="sidebar">
 			<nav class="" >
 				<h1><a class="" href="/">Retour au site</a></h1>
+				
 		    	<a class="side-item" href="/admin/games"> Jeux</a>
 		   		<ul class="">
-					<li class="uk-active"><a class="side-item" href="/admin/platforms">Platformes</a></li>
+					<li class=""><a class="side-item" href="/admin/platforms">Platformes</a></li>
 					<li><a class="side-item" href="/admin/genders">Genres</a></li>
 		        	<li><a class="side-item" href="/admin/descriptors">Descripteurs</a></li>
 				</ul>
