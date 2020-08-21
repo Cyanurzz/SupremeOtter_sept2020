@@ -49,7 +49,7 @@ public class GameAdminController {
 	@GetMapping
 	public String toGamesAdmin(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
-		return "gameAdmin";
+		return "gamesAdmin";
 	}
 	
 	@GetMapping("/update")

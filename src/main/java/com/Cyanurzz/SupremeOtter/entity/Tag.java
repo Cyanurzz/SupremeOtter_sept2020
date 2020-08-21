@@ -26,6 +26,9 @@ public class Tag {
 	
 	@ManyToMany(mappedBy = "tags")
 	List<Game> games= new ArrayList<>();
+	
+	@ManyToMany(mappedBy = "tags")
+	List<Article> articles= new ArrayList<>();
 
 	public Tag() {
 		super();
@@ -54,5 +57,15 @@ public class Tag {
 	public void setGames(List<Game> games) {
 		this.games = games;
 	}
+
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
+	}
+	
+	
 	
 }
