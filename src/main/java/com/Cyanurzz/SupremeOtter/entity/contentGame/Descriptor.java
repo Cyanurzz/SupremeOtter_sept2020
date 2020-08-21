@@ -22,6 +22,8 @@ public class Descriptor {
 	@NotNull(message="Champs Vide")
 	private String name;
 	
+	private String img;
+	
 	@ManyToMany(mappedBy = "descriptors")
 	List<Game> games= new ArrayList<>();
 
@@ -43,6 +45,14 @@ public class Descriptor {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public List<Game> getGames() {

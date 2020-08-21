@@ -75,7 +75,7 @@ public class GameAdminController {
 	@PostMapping("/update")
 	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid  Game game, BindingResult bindingResult) {
 		
-		List<Tag> tags = new ArrayList(); //Initialize Tag lis
+		List<Tag> tags = new ArrayList(); //Initialize Tag list
 		
 		if (bindingResult.hasErrors()) {
 			return "gameAdminUpdate";

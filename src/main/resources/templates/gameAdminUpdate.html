@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
-	<head th:replace="fragment/layout.html :: head(~{::title},~{},~{},~{::description})">
-		<title>Supreme Otter | Modifier un Jeux</title>
-		<meta name="description" content="">
+	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
+		<title>Supreme Otter | Manage Games</title>
 	</head>
 	<body class="uk-container">
-		<header th:replace="fragment/adminLayout.html :: header_admin"> </header>
+		<header th:replace="fragment/adminLayout.html :: header"> </header>
 			<h1 class="uk-text-large"  th:text="${game.id} ? 'Page de Modifications' : 'Page de Creation'"> </h1>
 			<div th:replace="fragment/adminLayout.html :: message"> </div>
 			<form method="post" th:action="@{/admin/games/update}" th:object="${game}" class="uk-grid-small uk-form" uk-grid>

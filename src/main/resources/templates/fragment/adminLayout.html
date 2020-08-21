@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
-
+	<head th:fragment="head(title)">
+    	<meta charset="utf-8">
+    	<title th:replace="${title}"></title>
+    	<meta content="" name="Admin Section of supreme Otter">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+		<!-- UIkit CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css" />
+	    <link rel="stylesheet" href="/css/adminlayout.css">
+	</head>
 	<body class="">
-		<header th:fragment="header_admin"></header>
 		<div th:fragment="message">		
 			<div th:if="${sucessMessage}" class="uk-alert-primary" uk-alert>
     			<a class="uk-alert-close" uk-close></a>
@@ -12,6 +20,19 @@
     			<a class="uk-alert-close" uk-close></a>
    				<p th:text="${errorMessage}">Erreur</p>
 			</div>
+		</div>
+		
+		<div th:fragment="header" class="sidebar">
+			<nav class="" >
+				<h1><a class="" href="/">Retour au site</a></h1>
+		    	<a class="side-item" href="/admin/games"> Jeux</a>
+		   		<ul class="">
+					<li class="uk-active"><a class="side-item" href="/admin/platforms">Platformes</a></li>
+					<li><a class="side-item" href="/admin/genders">Genres</a></li>
+		        	<li><a class="side-item" href="/admin/descriptors">Descripteurs</a></li>
+				</ul>
+				<a class="side-item" href="/admin/articles">Articles</a>
+			</nav>
 		</div>
 	</body>
 </html>

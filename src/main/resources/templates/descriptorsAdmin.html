@@ -10,8 +10,6 @@
 			<h1 class="uk-text-large">Gestion des Platformes</h1>
 			
 			<div th:replace="fragment/adminLayout.html :: message"> </div>
-			
-			<a class="uk-link-heading" th:href="@{/admin/platforms}"><span uk-icon="plus"></span>  Ajouter une platforme</a>
 			<div class="uk-flex uk-margin">
 				<table class="uk-width-1-2 uk-table uk-table-hover uk-table-divider uk-margin uk-card uk-card-default uk-card-body uk-overflow-auto  uk-height-large uk-margin-large-right">
 				    <thead>
@@ -24,21 +22,21 @@
 				        </tr>
 				    </thead>
 				    <tbody>
-				        <tr th:each="platform : ${platforms}">
-				            <td th:text="${platform.id}"></td>
-				            <td th:text="${platform.name}">Table Data</td>
-				            <td><img th:data-src="${platform.img}" width="150" th:alt="|visuel ${platform.name}|" uk-img></td>
+				        <tr th:each="descriptor : ${descriptors}">
+				            <td th:text="${descriptor.id}"></td>
+				            <td th:text="${descriptor.name}">Table Data</td>
+				            <td><img th:data-src="${descriptor.img}" width="150" th:alt="|visuel ${descriptor.name}|" uk-img></td>
 				            <td>
 				            	<ul class="uk-iconnav uk-iconnav-vertical">
-				            		<li><a th:href="@{/admin/platforms(id=${platform.id})}" uk-icon="icon: file-edit"></a></li>
-				            		<li><a th:href="@{/admin/platforms/delete(id=${platform.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer cete platforme ?')" uk-icon="icon: trash"></a></li>
+				            		<li><a th:href="@{/admin/descriptors(id=${descriptor.id})}" uk-icon="icon: file-edit"></a></li>
+				            		<li><a th:href="@{/admin/descriptors/delete(id=${descriptor.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer cete platforme ?')" uk-icon="icon: trash"></a></li>
 				            	</ul>
 				            </td>
 				        </tr>
 				    </tbody>
 				</table>
 				<div class="uk-width-1-2 uk-margin">
-					<form method="post" th:action="@{/admin/platforms/update}" th:object="${platform}" class="uk-grid-small uk-form" uk-grid>
+					<form method="post" th:action="@{/admin/descriptors/update}" th:object="${descriptor}" class="uk-grid-small uk-form" uk-grid>
 						<input name="id" th:field="*{id}" type="hidden">
 					    <div class="uk-width-1-1">
 					        <label class="uk-form-label" for="name">Nom *</label> 
@@ -53,8 +51,8 @@
 						
 		
 						<div class="uk-margin uk-margin-auto-left uk-text-center">
-							<input type="submit" th:value="${platform.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
-							<a href="/admin/games" class="uk-button uk-button-danger">Vider</a>
+							<input type="submit" th:value="${descriptor.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
+							<a href="/admin/descriptors" class="uk-button uk-button-danger">vider</a>
 						</div>
 					</form>
 				</div>

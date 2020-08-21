@@ -15,18 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Cyanurzz.SupremeOtter.entity.Tag;
-import com.Cyanurzz.SupremeOtter.entity.contentGame.Platform;
-import com.Cyanurzz.SupremeOtter.repository.GenderRepository;
-import com.Cyanurzz.SupremeOtter.repository.PlatformRepository;
+import com.Cyanurzz.SupremeOtter.entity.contentGame.Descriptor;
+import com.Cyanurzz.SupremeOtter.repository.DescriptorRepository;
 import com.Cyanurzz.SupremeOtter.repository.TagRepository;
 
-@RequestMapping("/admin/platforms")
 @Controller
-public class PlatformAdminController {
+@RequestMapping("/admin/descriptors")
+public class descriptorAdminController {
 
 	
 	@Autowired
-	PlatformRepository platformRepository;
+	DescriptorRepository descriptorRepository;
 	
 	@Autowired
 	TagRepository tagRepository;
@@ -34,51 +33,49 @@ public class PlatformAdminController {
 	@GetMapping
 	public String toPlaformAdminUpdate(Model model, @RequestParam(required= false) Integer id) {
 		
-		Platform platform = new Platform();
+		Descriptor descriptor = new Descriptor();
 		if (id != null) {
-			Optional<Platform> optionalPlatform = platformRepository.findById(id);
-			if (optionalPlatform.isPresent()) {
-				platform = optionalPlatform.get();
+			Optional<Descriptor> optionalDescriptor = descriptorRepository.findById(id);
+			if (optionalDescriptor.isPresent()) {
+				descriptor = optionalDescriptor.get();
 			}
 		}
-		model.addAttribute("platforms", platformRepository.findAll());
-		model.addAttribute("platform", platform);
+		model.addAttribute("descriptors", descriptorRepository.findAll());
+		model.addAttribute("descriptor", descriptor);
 		
 		
-		return "platformsAdmin";
+		return "descriptorsAdmin";
 	}
 	
 	@PostMapping("/update")
-	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid  Platform platform, BindingResult bindingResult) {
+	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid  Descriptor descriptor, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("platforms", platformRepository.findAll());
-			return "platformsAdmin";
+			model.addAttribute("platforms", descriptorRepository.findAll());
+			return "descriptorsAdmin";
 		}
 		if( id == null) {
 			
 			Tag tag = new Tag();
-			tag.setName(platform.getName().toLowerCase());
+			tag.setName(descriptor.getName().toLowerCase());
 			tagRepository.save(tag);
-			redirAttrs.addFlashAttribute("sucessMessage", "Nouvelle platforme créé");
+			redirAttrs.addFlashAttribute("sucessMessage", "Nouveau descripteur créé");
 		}else {
 			
-			redirAttrs.addFlashAttribute("sucessMessage", "La Platforme a été modifié");
+			redirAttrs.addFlashAttribute("sucessMessage", "La descripteur a été modifié");
 		}
 		
-		platformRepository.save(platform);
+		descriptorRepository.save(descriptor);
 		
-		return "redirect:/admin/platforms";
+		return "redirect:/admin/descriptors";
 	}
 	
 	@GetMapping("/delete")
 	public String delete(RedirectAttributes redirAttrs, @RequestParam Integer id) {
 		
-		Platform platformToDelete = platformRepository.findById(id).get();
-		platformRepository.delete(platformToDelete);
+		Descriptor descriptorToDelete = descriptorRepository.findById(id).get();
+		descriptorRepository.delete(descriptorToDelete);
 		redirAttrs.addFlashAttribute("sucessMessage", "Le jeu vient d'etre supprimé");
 		
-		return "redirect:/admin/platforms";
+		return "redirect:/admin/descriptors";
 	}
-
 }
-
