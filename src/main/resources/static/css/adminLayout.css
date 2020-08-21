@@ -48,19 +48,26 @@ h1:hover {
 }
 
 .side-item {
+	margin-left:10pt;
 	list-style: none;
 	font-size: 1.2rem;
-	padding: 0px 20px;
-	
+	padding: 0pt 5pt;
+	transition-property: border-bottom, color; /* Active la transition sur background-color */
+    transition-duration: 0.4s;
 	display:block;
+	border-radius: 0 0 0 0.5rem;
+  
 }
 
 .side-item a{
 	height: 100%;
+
 }
 
 .side-item:hover {
 	color: var(--main-red);
+	border-left : solid red 1pt;
+	padding: 0pt 4pt;
 }
 
 /* Content */
