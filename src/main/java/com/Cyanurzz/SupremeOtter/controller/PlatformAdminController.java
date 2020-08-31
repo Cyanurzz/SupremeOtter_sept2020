@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Cyanurzz.SupremeOtter.entity.Tag;
 import com.Cyanurzz.SupremeOtter.entity.contentGame.Platform;
-import com.Cyanurzz.SupremeOtter.repository.GenderRepository;
 import com.Cyanurzz.SupremeOtter.repository.PlatformRepository;
 import com.Cyanurzz.SupremeOtter.repository.TagRepository;
 
@@ -58,11 +57,12 @@ public class PlatformAdminController {
 			
 			Tag tag = new Tag();
 			tag.setName(platform.getName().toLowerCase());
+			tag.setKey("platform");
 			tagRepository.save(tag);
 			redirAttrs.addFlashAttribute("sucessMessage", "Nouvelle platforme créé");
 		}else {
 			
-			redirAttrs.addFlashAttribute("sucessMessage", "La Platforme a été modifié");
+			redirAttrs.addFlashAttribute("sucessMessage", "La platforme a été modifié");
 		}
 		
 		platformRepository.save(platform);
@@ -75,7 +75,7 @@ public class PlatformAdminController {
 		
 		Platform platformToDelete = platformRepository.findById(id).get();
 		platformRepository.delete(platformToDelete);
-		redirAttrs.addFlashAttribute("sucessMessage", "Le jeu vient d'etre supprimé");
+		redirAttrs.addFlashAttribute("sucessMessage", "La platforme vient d'etre supprimé");
 		
 		return "redirect:/admin/platforms";
 	}

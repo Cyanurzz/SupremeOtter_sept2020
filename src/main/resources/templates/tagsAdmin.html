@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
+		<title>Supreme Otter | Manage Platforms</title>
+	</head>
+	<body class="">
+		<div th:replace="fragment/adminLayout.html :: header"> </div>
+		
+		<section class="uk-container">
+			<h1 class="uk-text-large">Gestion des Tags</h1>
+			
+			<div th:replace="fragment/adminLayout.html :: message"> </div>
+			
+			<div class="uk-width-1-1 uk-margin">
+				<form method="post" th:action="@{/admin/tags/update}" th:object="${tag}" class="uk-grid-small uk-form" uk-grid>
+					<input name="id" th:field="*{id}" type="hidden">
+				    <div class="uk-width-1-2">
+				        <label class="uk-form-label" for="name">Nom *</label> 
+						<input id="name" name="name" placeholder="" th:field="*{name}" type="text" class="uk-input uk-form-large uk-width">
+						<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="uk-alert-danger" uk-alert></div>
+				    </div>
+					<div class="uk-width-1-2">
+				        <label class="uk-form-label" for="name">Cle *</label> 
+						<input id="key" name="key" placeholder="" th:field="*{key}" type="text" class="uk-input uk-form-large uk-width">
+						<div th:if="${#fields.hasErrors('key')}" th:errors="*{key}" class="uk-alert-danger" uk-alert></div>
+				    </div>
+					<div class="uk-margin uk-margin-auto-left uk-text-center">
+						<input type="submit" th:value="${tag.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
+						<a href="/admin/tags" class="uk-button uk-button-danger">Vider</a>
+					</div>
+				</form>
+			</div>
+			<div class="uk-flex uk-flex-wrap">
+				<div th:each="tag : ${tags}" class=" uk-card-default uk-card-body uk-margin uk-margin-right">
+				   <ul class="uk-iconnav">
+            			<li><p th:text="${tag.name}"></p></li>
+				        <li><a th:href="@{/admin/tags(id=${tag.id})}" uk-icon="icon: file-edit"></a></li>
+				    	<li><a th:href="@{/admin/tags/delete(id=${tag.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce tag ?')" uk-icon="icon: trash"></a></li>
+					</ul>	
+				</div>
+
+			</div>
+		</section>
+		
+		
+	</body>
+	<div th:replace="fragment/layout.html :: scripts"></div>
+</html>

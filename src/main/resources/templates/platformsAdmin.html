@@ -11,7 +11,7 @@
 			
 			<div th:replace="fragment/adminLayout.html :: message"> </div>
 			
-			<a class="uk-link-heading" th:href="@{/admin/platforms}"><span uk-icon="plus"></span>  Ajouter une platforme</a>
+			<a class="uk-link-heading" th:href="@{/admin/platforms}"><span uk-icon="plus"></span>  Ajouter une plateforme</a>
 			<div class="uk-flex uk-margin">
 				<table class="tabPlatforms uk-width-1-2 uk-table uk-table-hover uk-table-divider uk-margin uk-card uk-card-default uk-card-body uk-overflow-auto uk-margin-large-right">
 				    <thead>
@@ -47,7 +47,7 @@
 					    </div>
 					   	<div class="uk-width-1-1">
 					        <label class="uk-form-label" for="img">Image *</label> 
-							<input id="img" name="img" placeholder="Nom de la platforme" th:field="*{img}" type="text" class="uk-input uk-form-large uk-width">
+							<input id="img" name="img" placeholder="" th:field="*{img}" type="text" class="uk-input uk-form-large uk-width">
 							<div th:if="${#fields.hasErrors('img')}" th:errors="*{img}" class="uk-alert-danger" uk-alert></div>
 					    </div>
 						

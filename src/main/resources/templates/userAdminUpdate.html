@@ -31,7 +31,7 @@
 			    </div>
 			    <div class="uk-width-1-1">
 			        <label class="uk-form-label" for="password">Mot de Passe *</label> 
-					<input id="password" name="password" placeholder="N**********" th:field="*{title}" type="password" class="uk-input uk-form-large uk-width">
+					<input id="password" name="password" placeholder="**********" th:field="*{password}" type="password" class="uk-input uk-form-large uk-width">
 					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="uk-alert-danger" uk-alert></div>
 			    </div>
 

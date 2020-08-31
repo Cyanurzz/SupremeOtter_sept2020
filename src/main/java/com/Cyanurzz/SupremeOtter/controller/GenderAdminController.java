@@ -57,6 +57,7 @@ public class GenderAdminController {
 			
 			Tag tag = new Tag();
 			tag.setName(gender.getName().toLowerCase());
+			tag.setKey("gender");
 			tagRepository.save(tag);
 			redirAttrs.addFlashAttribute("sucessMessage", "Nouveau genre ajouté");
 		}else {

@@ -25,7 +25,7 @@ public class Platform {
 	
 	@ManyToMany(mappedBy = "platforms")
 	private List<Game> games= new ArrayList<>();
-	
+
 	private String img;
 	
 	
