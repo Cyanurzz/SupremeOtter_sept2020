@@ -50,7 +50,7 @@ public class descriptorAdminController {
 	@PostMapping("/update")
 	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid  Descriptor descriptor, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("platforms", descriptorRepository.findAll());
+			model.addAttribute("descriptors", descriptorRepository.findAll());
 			return "descriptorsAdmin";
 		}
 		if( id == null) {

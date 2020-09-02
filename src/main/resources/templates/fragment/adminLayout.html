@@ -34,7 +34,9 @@
 				</ul>
 				<a class="side-item" href="/admin/articles">Articles</a>
 				<a class="side-item" href="/admin/tags">Tags</a>
-				<a class="side-item" href="/admin/users">Utilisateurs</a>
+				<a sec:authorize="hasRole('SUPERADMIN')" class="side-item" href="/admin/users">Utilisateurs</a>
+				
+				<a class="side-item" href="/logout"><i class=""></i> Déconnexion</a>
 			</nav>
 		</div>
 	</body>

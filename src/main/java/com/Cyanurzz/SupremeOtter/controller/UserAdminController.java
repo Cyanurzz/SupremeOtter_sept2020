@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,9 @@ public class UserAdminController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@GetMapping
 	public String toUserAdmin(Model model) {
 		model.addAttribute("users", userRepository.findAll());
@@ -40,25 +44,29 @@ public class UserAdminController {
 				user = optionalUser.get();
 			}
 		}
-		
 		model.addAttribute("user", user);
 		
 		return "userAdminUpdate";
 	}
 	
+	
+	/** Trouvé moyen de bloqué modif password **/
 	@PostMapping("/update")
-	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid User user, BindingResult bindingResult) {
+	public String create(RedirectAttributes redirAttrs, Model model, @Valid User user, BindingResult bindingResult) {
 		
 		
 		if (bindingResult.hasErrors()) {
+			redirAttrs.addFlashAttribute("sucessMessage", "ERROR#!");
 			return "userAdminUpdate";
 		}
-		if( id == null) {
+		if( user.getId() == null) {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			redirAttrs.addFlashAttribute("sucessMessage", "Nouvel utilisateur créé");
 		}else {
+			user.setPassword(user.getPassword());
 			redirAttrs.addFlashAttribute("sucessMessage", "L'utilisateur à été modifié");
+			
 		}
-	
 		userRepository.save(user);
 		
 		return "redirect:/admin/users";

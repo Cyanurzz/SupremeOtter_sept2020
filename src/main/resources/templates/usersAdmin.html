@@ -30,14 +30,14 @@
 		            <td th:text="${user.id}"></td>
 		            <td th:text="${user.firstname}">Table Data</td>
 		            <td th:text="${user.lastname}">Table Data</td>
-		            <td th:text="${user.pseudo}">Table Data</td>
+		            <td th:text="${user.username}">Table Data</td>
 		            <td th:text="${user.email}">Table Data</td>
 		            <td th:text="${user.password} ? '*************':'Error password Null'">Table Data</td>
 
 					<td>
 		            	<ul class="uk-iconnav uk-iconnav-vertical">
-		            		<li><a th:href="@{/admin/games/update(id=${game.id})}" uk-icon="icon: file-edit"></a></li>
-		            		<li><a th:href="@{/admin/games/delete(id=${game.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce jeux ?')" uk-icon="icon: trash"></a></li>
+		            		<li><a th:href="@{/admin/users/update(id=${user.id})}" uk-icon="icon: file-edit"></a></li>
+		            		<li><a th:href="@{/admin/users/delete(id=${user.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer cet utilisateur?')" uk-icon="icon: trash"></a></li>
 		            	</ul>
 		            </td>
 		        </tr>

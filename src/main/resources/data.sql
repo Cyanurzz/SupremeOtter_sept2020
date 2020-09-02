@@ -79,3 +79,7 @@ INSERT INTO tag(key_tag, name) VALUES
 ('platform','xbox One'),
 ('platform','android'),
 ('platform','ios');
+
+INSERT INTO user (id, username, firstname, lastname, password, email, role) VALUES
+(1, 'SupremeOtter', 'Jean', 'Ducellier', '$2a$10$k.gGzFaNHZWqtK1/Rlacj.e7S1xHhH0QgA5zEqg8zWx6C0qSjluE.', 'supreme.otter@gmail.com', 'SUPERADMIN'),
+(2, 'otter', 'Supreme', 'Otter', '$2a$10$Bnu9Lwwk.BMyeGF1h4VLXeRTFZ459ZctxJcP4QWXegpheuSlxTF2S', 'a@gmail.com', 'SUPERADMIN');

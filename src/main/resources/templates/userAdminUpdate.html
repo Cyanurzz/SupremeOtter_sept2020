@@ -9,6 +9,7 @@
 			<div th:replace="fragment/adminLayout.html :: message"> </div>
 			<form method="post" th:action="@{/admin/users/update}" th:object="${user}" class="uk-grid-small uk-form" uk-grid>
 				<input name="id" th:field="*{id}" type="hidden">
+				<input id="password" name="password" th:value="*{password}" type="hidden" class="uk-input uk-form-large uk-width"> 
 			    <div class="uk-width-1-1">
 			        <label class="uk-form-label" for="firstname"> Prenom *</label> 
 					<input id="firstname" name="firstname" placeholder="Jack" th:field="*{firstname}" type="text" class="uk-input uk-form-large uk-width">
@@ -16,23 +17,29 @@
 			    </div>
 			    <div class="uk-width-1-1">
 			        <label class="uk-form-label" for="lastname">Nom *</label> 
-					<input id="lastname" name="lastname" placeholder="L'éventreur)" th:field="*{lastname}" type="text" class="uk-input uk-form-large uk-width">
+					<input id="lastname" name="lastname" placeholder="L'Eventreur" th:field="*{lastname}" type="text" class="uk-input uk-form-large uk-width">
 					<div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="uk-alert-danger" uk-alert></div>
 			    </div>
-			    <div class="uk-width-1-1">
+			    <div class="uk-width-1-2">
 			        <label class="uk-form-label" for="pseudo">Pseudo *</label> 
-					<input id="pseudo" name="pseudo" placeholder="JackTheReapper" th:field="*{pseudo}" type="text" class="uk-input uk-form-large uk-width">
-					<div th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}" class="uk-alert-danger" uk-alert></div>
+					<input id="username" name="username" placeholder="JackTheReapper" th:field="*{username}" type="text" class="uk-input uk-form-large uk-width">
+					<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="uk-alert-danger" uk-alert></div>
+			    </div>
+			    
+			    <div class="uk-width-1-2">
+			        <label class="uk-form-label" for="role">Role</label>
+			        <div class="uk-form-controls">
+			            <select class="uk-select uk-form-large" name="role" th:field="*{role}" id="role">
+			                <option value="SUPERADMIN">Super Administrateur</option>
+			                <option value="ADMIN">Administrateur</option>
+			                <option value="MEMBER">Membre</option>
+			            </select>
+			        </div>
 			    </div>
 			    <div class="uk-width-1-1">
-			        <label class="uk-form-label" for="email">Titre de l'article *</label> 
-					<input id="email" name="email" placeholder="Njackthe@reaper.death" th:field="*{email}" type="test" class="uk-input uk-form-large uk-width">
+			        <label class="uk-form-label" for="email">Email *</label> 
+					<input id="email" name="email" placeholder="Njackthe@reaper.death" th:field="*{email}" type="text" class="uk-input uk-form-large uk-width">
 					<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="uk-alert-danger" uk-alert></div>
-			    </div>
-			    <div class="uk-width-1-1">
-			        <label class="uk-form-label" for="password">Mot de Passe *</label> 
-					<input id="password" name="password" placeholder="**********" th:field="*{password}" type="password" class="uk-input uk-form-large uk-width">
-					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="uk-alert-danger" uk-alert></div>
 			    </div>
 
 				<div class="uk-margin uk-margin-auto-left uk-text-center">
