@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
+		<title>Supreme Otter | Manage Platforms</title>
+	</head>
+	<body class="">
+		<div th:replace="fragment/adminLayout.html :: header"> </div>
+		
+		<section class="content uk-container">
+			<h1 class="uk-text-large">Gestion des descripteurs</h1>
+			
+			<div th:replace="fragment/adminLayout.html :: message"> </div>
+			<div class="uk-flex uk-margin">
+				<table class="tabDescriptors uk-width-1-2 uk-table uk-table-hover uk-table-divider uk-margin uk-card uk-card-default uk-card-body uk-overflow-auto uk-margin-large-right">
+				    <thead>
+				        <tr>
+				            <th class="uk-table-shrink">id</th>
+				            <th>Nom</th>
+				            <th>img</th>
+				            <th></th>
+				            
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr th:each="descriptor : ${descriptors}">
+				            <td th:text="${descriptor.id}"></td>
+				            <td th:text="${descriptor.name}">Table Data</td>
+				            <td><img th:data-src="${descriptor.img}" width="150" th:alt="|visuel ${descriptor.name}|" uk-img></td>
+				            <td>
+				            	<ul class="uk-iconnav uk-iconnav-vertical">
+				            		<li><a th:href="@{/admin/descriptors(id=${descriptor.id})}" uk-icon="icon: file-edit"></a></li>
+				            		<li><a th:href="@{/admin/descriptors/delete(id=${descriptor.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer cete platforme ?')" uk-icon="icon: trash"></a></li>
+				            	</ul>
+				            </td>
+				        </tr>
+				    </tbody>
+				</table>
+				<div class="uk-width-1-2 uk-margin">
+					<form method="post" th:action="@{/admin/descriptors/update}" th:object="${descriptor}" class="uk-grid-small uk-form" uk-grid>
+						<input name="id" th:field="*{id}" type="hidden">
+					    <div class="uk-width-1-1">
+					        <label class="uk-form-label" for="name">Nom *</label> 
+							<input id="name" name="name" placeholder="Nom de la platforme" th:field="*{name}" type="text" class="uk-input uk-form-large uk-width">
+							<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="uk-alert-danger" uk-alert></div>
+					    </div>
+					   	<div class="uk-width-1-1">
+					        <label class="uk-form-label" for="img">Image *</label> 
+							<input id="img" name="img" placeholder="Nom de la platforme" th:field="*{img}" type="text" class="uk-input uk-form-large uk-width">
+							<div th:if="${#fields.hasErrors('img')}" th:errors="*{img}" class="uk-alert-danger" uk-alert></div>
+					    </div>
+						
+		
+						<div class="uk-margin uk-margin-auto-left uk-text-center">
+							<input type="submit" th:value="${descriptor.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
+							<a href="/admin/descriptors" class="uk-button uk-button-danger">vider</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+		
+		
+	</body>
+	<div th:replace="fragment/layout.html :: scripts"></div>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
+		<title>Supreme Otter | Manage Games</title>
+	</head>
+	<body class="uk-container">
+		<header th:replace="fragment/adminLayout.html :: header"> </header>
+			<h1 class="uk-text-large"  th:text="${article.id} ? 'Page de Modifications' : 'Page de Creation'"> </h1>
+			<div th:replace="fragment/adminLayout.html :: message"> </div>
+			<form method="post" th:action="@{/admin/articles/update}" th:object="${article}" class="uk-grid-small uk-form" uk-grid>
+				<input name="id" th:field="*{id}" type="hidden">
+			    <div class="uk-width-1-1">
+			        <label class="uk-form-label" for="title">Titre de l'article *</label> 
+					<input id="title" name="title" placeholder="Note de Maj super smash bros" th:field="*{title}" type="text" class="uk-input uk-form-large uk-width">
+					<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="uk-alert-danger" uk-alert></div>
+			    </div>
+			    <div class="uk-width-1-1">
+			        <label class="uk-form-label" for="bannier">Bannière *</label> 
+					<input id="bannier" name="bannier" placeholder="" th:field="*{bannier}" type="text" class="uk-input uk-form-large uk-width">
+					<div th:if="${#fields.hasErrors('bannier')}" th:errors="*{bannier}" class="uk-alert-danger" uk-alert></div>
+			    </div>
+        		<div class="uk-width-1-1 uk-card uk-card-default uk-card-body uk-child-width-auto uk-card-hover">
+        			<p>tags *</p>
+        			<ul class=" uk-grid-small uk-grid uk-child-width-auto">
+			    		<li th:each="tag : ${tags}">
+            				<label for="tags" th:text="| ${tag.name}|"></label>
+            				<input  th:value="${tag.id}" class="uk-checkbox" type="checkbox" th:field="*{tags}" id="tags" name="tags">
+			    		</li>
+			    	</ul>
+        		</div>
+			    <div class="uk-width-">
+			        <label class="uk-form-label" for = "content">Contenu</label>
+					<textarea id="content" name="content" th:field="*{content}" rows=8 class="uk-textarea uk-form-large"></textarea>
+					<div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="uk-alert-danger" uk-alert></div>
+			    </div>
+
+				<div class="uk-margin uk-margin-auto-left uk-text-center">
+					<input type="submit" th:value="${article.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
+					<a href="/admin/articles" class="uk-button uk-button-danger">Retour en arriere</a>
+				</div>
+			
+		</form>
+		
+	</body>
+	<div th:replace="fragment/layout.html :: scripts"></div>
+</html>

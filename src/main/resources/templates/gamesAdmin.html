@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
+		<title>Supreme Otter | Manage Games</title>
+	</head>
+	<body class="uk-container">
+		<header th:replace="fragment/adminLayout.html :: header"> </header>
+		<h1 class="uk-text-large">Gestion des Jeux</h1>
+		
+		<div th:replace="fragment/adminLayout.html :: message"> </div>
+		
+		<a class="uk-link-heading" th:href="@{/admin/games/update}"><span uk-icon="plus"></span>  Ajouter un jeux</a>
+	
+		
+		<table class="uk-table uk-table-hover uk-table-divider uk-margin uk-margin-auto-right uk-margin-auto@m uk-card uk-card-default uk-card-body">
+		    <thead>
+		        <tr>
+		            <th class="uk-table-shrink">id</th>
+		            <th>Titre</th>
+		            <th>Banniere</th>
+		            <th>Date de Sortie</th>
+		            <th>Classification</th>
+		            <th>Descripteurs</th>
+		            <th>Gender</th>
+		            <th>Platformes</th>
+		            <th></th>
+		            
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="game : ${games}">
+		            <td th:text="${game.id}"></td>
+		            <td th:text="${game.title}">Table Data</td>
+		            <td></td>
+		            <!-- <td><img th:data-src="${article.picture}" width="150" th:alt="|visuel ${article.title}|" uk-img></td> -->
+		            <td th:text="${#dates.format(game.releaseDate,'dd MMM yyyy')}">Table Data</td>
+		            <td th:text="| ${game.classification} +|"></td>
+		             <td>
+		             	<ul>
+		            		<li th:each="descriptor: ${game.descriptors}" th:text="${descriptor.name}"></li>
+		            	</ul>
+		            <td>
+		            	<ul>
+		            		<li th:each="gender: ${game.genders}" th:text="${gender.name}"></li>
+		            	</ul>
+		            </td>
+		            <td>
+		            	<ul>
+		            		<li th:each="platform: ${game.platforms}">
+		            			<p th:text="${platform.name}"></p>
+		            			<img th:data-src="${platform.img}" height="87px" width="100px" th:alt="|available on ${platform.name}|">
+		            		</li>
+		            	</ul>
+		            </td>
+		            <td>
+		            	<ul class="uk-iconnav uk-iconnav-vertical">
+		            		<li><a th:href="@{/admin/games/update(id=${game.id})}" uk-icon="icon: file-edit"></a></li>
+		            		<li><a th:href="@{/admin/games/delete(id=${game.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce jeux ?')" uk-icon="icon: trash"></a></li>
+		            	</ul>
+		            </td>
+		        </tr>
+		    </tbody>
+		</table>
+	</body>
+	<div th:replace="fragment/layout.html :: scripts"></div>
+</html>

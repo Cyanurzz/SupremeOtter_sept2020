@@ -1,11 +1,79 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
-	<head th:replace="fragment/layout.html :: head(~{::title},~{::description},~{},~{})">
-		<title>Supreme Otter | Home</title>
-		<meta name="description" content="">
+	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
+		<title>Supreme Otter | Manage Games</title>
 	</head>
-	<body class="container">
-		<header th:replace="fragment/layout.htm :: header"></header>
+	<body class="uk-container">
+		<header th:replace="fragment/adminLayout.html :: header"> </header>
+			<h1 class="uk-text-large"  th:text="${game.id} ? 'Page de Modifications' : 'Page de Creation'"> </h1>
+			<div th:replace="fragment/adminLayout.html :: message"> </div>
+			<form method="post" th:action="@{/admin/games/update}" th:object="${game}" class="uk-grid-small uk-form" uk-grid>
+				<input name="id" th:field="*{id}" type="hidden">
+			    <div class="uk-width-1-1">
+			        <label class="uk-form-label" for="title">Titre du jeux *</label> 
+					<input id="title" name="title" placeholder="Titre du jeux" th:field="*{title}" type="text" class="uk-input uk-form-large uk-width">
+					<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="uk-alert-danger" uk-alert></div>
+			    </div>
+			    <div class="uk-width-1-3">
+			    	<label for="releaseDate">Date de Sortie *</label>
+					<input type="text" class="date uk-input uk-form-large" id="releaseDate" name="releaseDate" th:field="*{releaseDate}"/>
+					<div th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}" class="uk-alert-danger" uk-alert></div>
+			    </div>
+			   	<div class="uk-width-1-3">
+			   		<label for="releaseDate">Age Recommande *</label>
+            		<select type=number class="uk-select uk-input uk-form-large" th:field="*{classification}">
+                		<option th:value=3>Pegi 3</option>
+                		<option th:value=7>Pegi 7</option>
+                		<option th:value=12>Pegi 12</option>
+                		<option th:value=16>Pegi 16</option>
+                		<option th:value=18>Pegi 18</option>
+           			</select>
+        		</div>
+        		<div class="uk-width-1-2 uk-card uk-card-default uk-card-body uk-child-width-auto uk-card-hover">
+        			<p>Descripteurs *</p>
+        			<ul class=" uk-grid-small uk-grid uk-child-width-auto">
+			    		<li th:each="descriptor : ${descriptors}">
+            				<label for="descriptors" th:text="| ${descriptor.name}|"></label>
+            				<input  th:value="${descriptor.id}" class="uk-checkbox" type="checkbox" th:field="*{descriptors}" id="descriptors" name="descriptors">
+			    		</li>
+			    	</ul>
+        		</div>
+        		<div class="uk-width-1-2 uk-card uk-card-default uk-card-body uk-child-width-auto uk-card-hover">
+        			<p>Platform disponible *</p>
+        			<ul class=" uk-margin uk-grid-small uk-grid uk-child-width-auto ">
+			    	 
+			    		<li th:each="platform : ${platforms}">
+            				<label for="platforms" th:text="| ${platform.name}|"></label>
+            				<input  th:value="${platform.id}" class="uk-checkbox" type="checkbox" th:field="*{platforms}" id="platforms" name="platforms">
+			    		</li>
+			   		</ul>
+        		</div>
+
+			    <ul class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+			    	 <p>Genres :</p>
+			    	<li th:each="gender : ${genders}">
+            			<label for="genders" th:text="| ${gender.name}|"></label>
+            			<input  th:value="${gender.id}" class="uk-checkbox" type="checkbox" th:field="*{genders}" id="genders" name="genders">
+			    	</li>
+			    </ul>
+			    <div class="uk-width-">
+			        <label class="uk-form-label" for = "tags">Tag(s)</label>
+					<input id="tags" name="tags" th:field="*{tags}" type="text" class="uk-input uk-form-large">
+					<div th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}" class="uk-alert-danger" uk-alert></div>
+			    </div>
+			    <div class="uk-width-">
+			        <label class="uk-form-label" for = "description">Descrtition</label>
+					<textarea id="description" name="description" th:field="*{description}" rows=8 class="uk-textarea uk-form-large"></textarea>
+					<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="uk-alert-danger" uk-alert></div>
+			    </div>
+
+				<div class="uk-margin uk-margin-auto-left uk-text-center">
+					<input type="submit" th:value="${game.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
+					<a href="/admin/games" class="uk-button uk-button-danger">Retour en arriere</a>
+				</div>
+			
+		</form>
+		
 	</body>
 	<div th:replace="fragment/layout.html :: scripts"></div>
 </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
+		<title>Supreme Otter | Manage Platforms</title>
+	</head>
+	<body class="">
+		<div th:replace="fragment/adminLayout.html :: header"> </div>
+		
+		<section class="content uk-container">
+			<h1 class="uk-text-large">Gestion des Platformes</h1>
+			
+			<div th:replace="fragment/adminLayout.html :: message"> </div>
+			
+			<a class="uk-link-heading" th:href="@{/admin/platforms}"><span uk-icon="plus"></span>  Ajouter une plateforme</a>
+			<div class="uk-flex uk-margin">
+				<table class="tabPlatforms uk-width-1-2 uk-table uk-table-hover uk-table-divider uk-margin uk-card uk-card-default uk-card-body uk-overflow-auto uk-margin-large-right">
+				    <thead>
+				        <tr>
+				            <th class="uk-table-shrink">id</th>
+				            <th>Nom</th>
+				            <th>img</th>
+				            <th></th>
+				            
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr th:each="platform : ${platforms}">
+				            <td th:text="${platform.id}"></td>
+				            <td th:text="${platform.name}">Table Data</td>
+				            <td><img th:data-src="${platform.img}" width="150" th:alt="|visuel ${platform.name}|" uk-img></td>
+				            <td>
+				            	<ul class="uk-iconnav uk-iconnav-vertical">
+				            		<li><a th:href="@{/admin/platforms(id=${platform.id})}" uk-icon="icon: file-edit"></a></li>
+				            		<li><a th:href="@{/admin/platforms/delete(id=${platform.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer cete platforme ?')" uk-icon="icon: trash"></a></li>
+				            	</ul>
+				            </td>
+				        </tr>
+				    </tbody>
+				</table>
+				<div class="uk-width-1-2 uk-margin">
+					<form method="post" th:action="@{/admin/platforms/update}" th:object="${platform}" class="uk-grid-small uk-form" uk-grid>
+						<input name="id" th:field="*{id}" type="hidden">
+					    <div class="uk-width-1-1">
+					        <label class="uk-form-label" for="name">Nom *</label> 
+							<input id="name" name="name" placeholder="Nom de la platforme" th:field="*{name}" type="text" class="uk-input uk-form-large uk-width">
+							<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="uk-alert-danger" uk-alert></div>
+					    </div>
+					   	<div class="uk-width-1-1">
+					        <label class="uk-form-label" for="img">Image *</label> 
+							<input id="img" name="img" placeholder="" th:field="*{img}" type="text" class="uk-input uk-form-large uk-width">
+							<div th:if="${#fields.hasErrors('img')}" th:errors="*{img}" class="uk-alert-danger" uk-alert></div>
+					    </div>
+						
+		
+						<div class="uk-margin uk-margin-auto-left uk-text-center">
+							<input type="submit" th:value="${platform.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
+							<a href="/admin/games" class="uk-button uk-button-danger">Vider</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+		
+		
+	</body>
+	<div th:replace="fragment/layout.html :: scripts"></div>
+</html>

@@ -8,16 +8,39 @@
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 		<!-- UIkit CSS -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css" />
-		<link rel="stylesheet" href="css/style.sass">
 		<th:block th:replace="${links}">
 		<th:block th:replace="${scripts}">
 	</head>
 	<body class="">
-		<header th:fragment="top">
-		
-		</header>
-		
-		<footer th:fragment="">
+	<header th:fragment="top">
+		<nav class="uk-navbar-container" uk-navbar>
+			<div class="uk-navbar-left">
+				<ul class="uk-navbar-nav">
+					<li class="uk-active"><a href="/">Supreme Otter</a></li>
+					<li><a href="#">Games</a></li>
+				</ul>
+			</div>
+
+			<div class="uk-navbar-right">
+				
+				
+				<ul class="uk-navbar-nav">
+					<li><a sec:authorize="isAnonymous()" class="login-icon" th:href="@{/login}" ><span uk-icon="sign-in"></span> Log In</a></li>
+					<li sec:authorize="isAuthenticated()"><a href="#" sec:authentication="name"></a>
+						<div class="uk-navbar-dropdown">
+							<ul class="uk-nav uk-navbar-dropdown-nav">
+								<li><a class="dropdown-item" sec:authorize="hasAnyRole('SUPERADMIN', 'ADMIN')" th:href="@{/admin/users}">Administration</a></li>
+								<li><a class="dropdown-item" th:href="@{/profil}">Mon Profil</a></li>
+								<li><a class="dropdown-item" th:href="@{/logout}">Déconnexion <span uk-icon="sign-out"></span></a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<footer th:fragment="">
 		
 		</footer>
 	</body>

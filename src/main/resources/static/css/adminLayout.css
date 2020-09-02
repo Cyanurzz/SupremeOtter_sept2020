@@ -1,0 +1,84 @@
+
+:root {
+  --main-bg: rgb(13, 20, 64);
+  --main-txt: whitesmoke;
+  --main-red: rgb(191, 23, 54);
+  --main-blue3: rgb(14, 39, 115);
+  --main-blue2: rgb(20, 56, 166);
+  --main-blue1: rgb(20, 85, 217);
+
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul{
+	list-style: none;
+}
+*{
+	font-family: 'Montserrat', sans-serif;
+}
+/* Sidebar */
+
+.sidebar {
+	height: 100%;
+	width: 250px;
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	background-color: var(--main-bg);
+	color: var(--main-txt);
+}
+
+h1{
+	font-size: 1.4rem;
+	text-transform: uppercase;
+	padding: 20px;
+}
+
+.sidebar>nav>h1 {
+	color: var(--main-txt);
+}
+
+h1:hover {
+	color: var(--main-red);
+}
+
+.side-item {
+	margin-left:10pt;
+	list-style: none;
+	font-size: 1.2rem;
+	padding: 0pt 5pt;
+	transition-property: border-bottom, color; /* Active la transition sur background-color */
+    transition-duration: 0.4s;
+	display:block;
+	border-radius: 0 0 0 0.5rem;
+  
+}
+
+.side-item a{
+	height: 100%;
+
+}
+
+.side-item:hover {
+	color: var(--main-red);
+	border-left : solid red 1pt;
+	padding: 0pt 4pt;
+}
+
+/* Content */
+
+.content {
+	margin-left: 250px;
+}
+
+/* Tab COntent height*/
+
+.tabDescriptors, .tabGender, .tabPlatforms {
+	max-height:80vh;
+}
+
