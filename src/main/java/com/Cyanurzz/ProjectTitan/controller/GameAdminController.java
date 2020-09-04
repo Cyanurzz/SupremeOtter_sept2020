@@ -83,6 +83,7 @@ public class GameAdminController {
 		if( id == null) { // IF id is null create tag with the game name and add it to the empty list
 			
 			Tag tag = new Tag();
+			tag.setKey("GAME");
 			tag.setName(game.getTitle().toLowerCase());
 			tagRepository.save(tag);
 			tags.add(tag);

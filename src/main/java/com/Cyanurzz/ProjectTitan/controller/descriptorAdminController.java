@@ -57,7 +57,7 @@ public class descriptorAdminController {
 			
 			Tag tag = new Tag();
 			tag.setName(descriptor.getName().toLowerCase());
-			tag.setKey("descriptor");
+			tag.setKey("DESCRIPTOR");
 			tagRepository.save(tag);
 			redirAttrs.addFlashAttribute("sucessMessage", "Nouveau descripteur créé");
 		}else {

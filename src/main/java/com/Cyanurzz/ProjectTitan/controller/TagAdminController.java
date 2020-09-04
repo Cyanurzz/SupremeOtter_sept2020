@@ -55,6 +55,7 @@ public class TagAdminController {
 			redirAttrs.addFlashAttribute("sucessMessage", "Tag a été modifié");
 		}
 		
+		tag.setKey(tag.getKey().toUpperCase());
 		tagRepository.save(tag);
 		
 		return "redirect:/admin/tags";

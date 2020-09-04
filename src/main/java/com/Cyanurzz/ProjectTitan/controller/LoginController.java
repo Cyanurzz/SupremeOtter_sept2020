@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Cyanurzz.ProjectTitan.entity.User;
 import com.Cyanurzz.ProjectTitan.repository.UserRepository;
@@ -52,11 +53,21 @@ public class LoginController  {
 	}
 	
 	@PostMapping("/register")
-	public String addMember(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setRole("MEMBER");
-		userRepository.save(user);
-		return "redirect:/login";
+	public String addMember(RedirectAttributes redirAttrs, Model model, User user) {
+		
+		if (userRepository.findByUsername(user.getUsername()) != null) {
+			model.addAttribute("errorMessage", "Pseudo déjà utilisé !");
+			return "register";
+		} else if (userRepository.findByEmail(user.getEmail()) != null){
+			model.addAttribute("errorMessage", "Email déjà utilisé !");
+			return "register";
+		} else {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			user.setRole("MEMBER");
+			userRepository.save(user);
+			return "redirect:/login";
+		}
+
 	}
 	
 }

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.Cyanurzz</groupId>
-	<artifactId>SupremeOtter</artifactId>
+	<artifactId>ProjectTitan</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SupremeOtter</name>
+	<name>ProjectTitan</name>
 	<description>Supreme Website for  Supreme Ootter</description>
 
 	<properties>

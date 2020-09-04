@@ -57,7 +57,7 @@ public class PlatformAdminController {
 			
 			Tag tag = new Tag();
 			tag.setName(platform.getName().toLowerCase());
-			tag.setKey("platform");
+			tag.setKey("PLATFORM");
 			tagRepository.save(tag);
 			redirAttrs.addFlashAttribute("sucessMessage", "Nouvelle platforme créé");
 		}else {
