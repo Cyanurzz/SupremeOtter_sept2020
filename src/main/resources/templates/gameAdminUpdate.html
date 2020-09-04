@@ -3,8 +3,10 @@
 	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
 		<title>Project Titan | Manage Games</title>
 	</head>
-	<body class="uk-container">
+	<body >
 		<header th:replace="fragment/adminLayout.html :: header"> </header>
+		
+		<main class="content uk-container">
 			<h1 class="uk-text-large"  th:text="${game.id} ? 'Page de Modifications' : 'Page de Creation'"> </h1>
 			<div th:replace="fragment/adminLayout.html :: message"> </div>
 			<form method="post" th:action="@{/admin/games/update}" th:object="${game}" class="uk-grid-small uk-form" uk-grid>
@@ -72,8 +74,8 @@
 					<a href="/admin/games" class="uk-button uk-button-danger">Retour en arriere</a>
 				</div>
 			
-		</form>
-		
+			</form>
+		</main>	
 	</body>
 	<div th:replace="fragment/layout.html :: scripts"></div>
 </html>
