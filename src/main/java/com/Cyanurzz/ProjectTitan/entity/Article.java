@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class Article {
 	
 	private String content;
 	
-	private String bannier;
+	private String banner;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date releaseDate;
@@ -35,7 +36,7 @@ public class Article {
 	@JoinColumn(name="user_id", insertable = false, updatable = false, nullable=true)
 	private User author;
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "tag_article", joinColumns = @JoinColumn(name = "article_id") , inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	private List<Tag> tags;
 
@@ -69,12 +70,12 @@ public class Article {
 		this.content = content;
 	}
 
-	public String getBannier() {
-		return bannier;
+	public String getBanner() {
+		return banner;
 	}
 
-	public void setBannier(String bannier) {
-		this.bannier = bannier;
+	public void setBanner(String banner) {
+		this.banner = banner;
 	}
 	
 	public Date getReleaseDate() {
