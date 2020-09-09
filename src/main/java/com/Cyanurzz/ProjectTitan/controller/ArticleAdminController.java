@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Cyanurzz.ProjectTitan.entity.Article;
 import com.Cyanurzz.ProjectTitan.repository.ArticleRepository;
 import com.Cyanurzz.ProjectTitan.repository.TagRepository;
+import com.Cyanurzz.ProjectTitan.service.FileUpload;
 
 @RequestMapping("/admin/articles")
 @Controller
@@ -28,6 +30,11 @@ public class ArticleAdminController {
 	
 	@Autowired
 	private TagRepository tagRepository;
+	
+	private String DIR = "";
+
+	@Autowired
+	private FileUpload fileUpload;
 	
 	@GetMapping
 	public String toArticlesAdmin(Model model) {
@@ -54,9 +61,16 @@ public class ArticleAdminController {
 	}
 	
 	@PostMapping("/update")
-	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid Article article, BindingResult bindingResult) {
+	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid Article article, @RequestParam("banner") MultipartFile banner, BindingResult bindingResult) {
 		
-		
+		String path = "";
+		if (id != null) {
+			path = articleRepository.findById(id).get().getBanner();
+		}
+		if (!banner.isEmpty()) {
+			String fileName = "article_" + article.getTitle().replaceAll(" ", "_").toLowerCase();
+			path = fileUpload.writeFile(banner, DIR, fileName);
+		}
 		if (bindingResult.hasErrors()) {
 			return "articleAdminUpdate";
 		}
@@ -68,7 +82,7 @@ public class ArticleAdminController {
 		
 	    Date date = new Date();  
 		article.setReleaseDate(date);
-	
+		article.setBanner(path);
 		
 		articleRepository.save(article);
 		
