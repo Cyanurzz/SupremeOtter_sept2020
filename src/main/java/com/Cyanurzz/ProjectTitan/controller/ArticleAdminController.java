@@ -1,14 +1,14 @@
 package com.Cyanurzz.ProjectTitan.controller;
 
+import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Cyanurzz.ProjectTitan.entity.Article;
+import com.Cyanurzz.ProjectTitan.entity.Tag;
 import com.Cyanurzz.ProjectTitan.repository.ArticleRepository;
 import com.Cyanurzz.ProjectTitan.repository.TagRepository;
+import com.Cyanurzz.ProjectTitan.repository.UserRepository;
 import com.Cyanurzz.ProjectTitan.service.FileUpload;
 
 @RequestMapping("/admin/articles")
@@ -30,6 +32,9 @@ public class ArticleAdminController {
 	
 	@Autowired
 	private TagRepository tagRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	private String DIR = "";
 
@@ -61,27 +66,29 @@ public class ArticleAdminController {
 	}
 	
 	@PostMapping("/update")
-	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid Article article, @RequestParam("banner") MultipartFile banner, BindingResult bindingResult) {
+	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @RequestParam() String title, @RequestParam() String content, @RequestParam("banner") MultipartFile banner, @RequestParam() List<Tag> tags) {
 		
 		String path = "";
 		if (id != null) {
 			path = articleRepository.findById(id).get().getBanner();
 		}
 		if (!banner.isEmpty()) {
-			String fileName = "article_" + article.getTitle().replaceAll(" ", "_").toLowerCase();
+			String fileName = "article_" + title.replaceAll(" ", "_").toLowerCase();
 			path = fileUpload.writeFile(banner, DIR, fileName);
-		}
-		if (bindingResult.hasErrors()) {
-			return "articleAdminUpdate";
 		}
 		if( id == null) {
 			redirAttrs.addFlashAttribute("sucessMessage", "Nouvel article créé");
 		}else {
 			redirAttrs.addFlashAttribute("sucessMessage", "L'Article à été modifié");
 		}
-		
+		Article article = new Article();
 	    Date date = new Date();  
-		article.setReleaseDate(date);
+	    article.setId(id);
+	    article.setTitle(title);
+	    article.setContent(content);
+	    article.setAuthor(userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+	    article.setReleaseDate(date);
+	    article.setTags(tags);
 		article.setBanner(path);
 		
 		articleRepository.save(article);

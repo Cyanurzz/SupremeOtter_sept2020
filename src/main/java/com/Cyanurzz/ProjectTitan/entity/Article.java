@@ -44,7 +44,6 @@ public class Article {
 	public Article() {
 		super();
 	}
-	
 
 	public Integer getId() {
 		return id;
