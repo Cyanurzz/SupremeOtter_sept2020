@@ -8,7 +8,7 @@
 		<main class="content uk-container">
 			<h1 class="uk-text-large">Gestion des Articles</h1>
 			<div th:replace="fragment/adminLayout.html :: message"> </div>
-			<a class="uk-link-heading" th:href="@{/admin/articles/update}"><span uk-icon="plus"></span>  Créer un Article</a>
+			<a class="uk-link-heading" th:href="@{/admin/articles/update}"><span uk-icon="plus"></span>  Crï¿½er un Article</a>
 			
 			<table class="uk-table uk-table-hover uk-table-divider uk-margin uk-margin-auto-right uk-margin-auto@m uk-card uk-card-default uk-card-body">
 			    <thead>
@@ -39,7 +39,7 @@
 			            <td>
 			            	<ul class="uk-iconnav uk-iconnav-vertical">
 			            		<li><a th:href="@{/admin/articles/update(id=${article.id})}" uk-icon="icon: file-edit"></a></li>
-			            		<li><a th:href="@{/admin/articles/delete(id=${article.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer cet article ?')" uk-icon="icon: trash"></a></li>
+			            		<li><a th:href="@{/admin/articles/delete(id=${article.id})}" onclick="return confirm('Etes vous sï¿½r de vouloir supprimer cet article ?')" uk-icon="icon: trash"></a></li>
 			            	</ul>
 			            </td>
 			        </tr>

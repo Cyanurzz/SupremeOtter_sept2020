@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
 	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
-		<title>Project Titan | Manage Games</title>
+		<title>Project Titan | Manage Articles</title>
 	</head>
 	<body>
 		<header th:replace="fragment/adminLayout.html :: header"> </header>
@@ -9,7 +9,7 @@
 			<h1 class="uk-text-large"  th:text="${article.id} ? 'Page de Modifications' : 'Page de Creation'"> </h1>
 			<div th:replace="fragment/adminLayout.html :: message"> </div>
 			
-			<form method="post" th:action="@{/admin/articles/update}" th:object="${article}" class="uk-grid-small uk-form" uk-grid>
+			<form method="post" th:action="@{/admin/articles/update}" th:object="${article}" class="uk-grid-small uk-form" enctype="multipart/form-data" uk-grid>
 				<input name="id" th:field="*{id}" type="hidden">
 			    <div class="uk-width-1-1">
 			        <label class="uk-form-label" for="title">Titre de l'article *</label> 
@@ -17,7 +17,7 @@
 					<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="uk-alert-danger" uk-alert></div>
 			    </div>
 				<div class="js-upload" uk-form-custom>
-					<label class="uk-form-label" for="banner">Bannière : </label> 
+					<label class="uk-form-label" for="banner">Banniï¿½re : </label> 
 				    <input type="file" th:field="*{banner}" id="banner">
 				    <button class="uk-button uk-button-default" id="button" type="button" tabindex="-1">Select</button>
 				    <span id="custom-text">No file chosen, yet.</span>
@@ -37,7 +37,7 @@
 					<textarea id="content" name="content" th:field="*{content}" rows=8 class="uk-textarea uk-form-large"></textarea>
 					<div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="uk-alert-danger" uk-alert></div>
 			    </div>
-				<p id="values"> you're not working shitty stuff</p>
+			    
 				<div class="uk-margin uk-margin-auto-left uk-text-center">
 					<input type="submit" th:value="${article.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
 					<a href="/admin/articles" class="uk-button uk-button-danger">Retour en arriere</a>
@@ -49,17 +49,17 @@
 	</body>
 	<div th:replace="fragment/layout.html :: scripts"></div>
 	<script>
-		const realFileBtn = document.getElementById("banner");
-		const customBtn = document.getElementById("button");
+		const file = document.getElementById("banner");
+		const uploadBtn = document.getElementById("button");
 		const customTxt = document.getElementById("custom-text");
 	
-		customBtn.addEventListener("click", function() {
-		  realFileBtn.click();
+		uploadBtn.addEventListener("click", function() {
+		  file.click();
 		});
 	
-		realFileBtn.addEventListener("change", function() {
-		  if (realFileBtn.value) {
-		    customTxt.innerHTML = realFileBtn.value.match(
+		file.addEventListener("change", function() {
+		  if (file.value) {
+		    customTxt.innerHTML = file.value.match(
 		      /[\/\\]([\w\d\s\.\-\(\)]+)$/
 		    )[1];
 		  } else {
