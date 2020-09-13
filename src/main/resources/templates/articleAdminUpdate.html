@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
 	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
-		<title>Supreme Otter | Manage Games</title>
+		<title>Project Titan | Manage Games</title>
 	</head>
-	<body class="uk-container">
+	<body>
 		<header th:replace="fragment/adminLayout.html :: header"> </header>
+		<main class="content uk-container">
 			<h1 class="uk-text-large"  th:text="${article.id} ? 'Page de Modifications' : 'Page de Creation'"> </h1>
 			<div th:replace="fragment/adminLayout.html :: message"> </div>
+			
 			<form method="post" th:action="@{/admin/articles/update}" th:object="${article}" class="uk-grid-small uk-form" uk-grid>
 				<input name="id" th:field="*{id}" type="hidden">
 			    <div class="uk-width-1-1">
@@ -14,11 +16,13 @@
 					<input id="title" name="title" placeholder="Note de Maj super smash bros" th:field="*{title}" type="text" class="uk-input uk-form-large uk-width">
 					<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="uk-alert-danger" uk-alert></div>
 			    </div>
-			    <div class="uk-width-1-1">
-			        <label class="uk-form-label" for="bannier">Bannière *</label> 
-					<input id="bannier" name="bannier" placeholder="" th:field="*{bannier}" type="text" class="uk-input uk-form-large uk-width">
-					<div th:if="${#fields.hasErrors('bannier')}" th:errors="*{bannier}" class="uk-alert-danger" uk-alert></div>
-			    </div>
+				<div class="js-upload" uk-form-custom>
+					<label class="uk-form-label" for="banner">Bannière : </label> 
+				    <input type="file" th:field="*{banner}" id="banner">
+				    <button class="uk-button uk-button-default" id="button" type="button" tabindex="-1">Select</button>
+				    <span id="custom-text">No file chosen, yet.</span>
+				    
+				</div>
         		<div class="uk-width-1-1 uk-card uk-card-default uk-card-body uk-child-width-auto uk-card-hover">
         			<p>tags *</p>
         			<ul class=" uk-grid-small uk-grid uk-child-width-auto">
@@ -33,14 +37,34 @@
 					<textarea id="content" name="content" th:field="*{content}" rows=8 class="uk-textarea uk-form-large"></textarea>
 					<div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="uk-alert-danger" uk-alert></div>
 			    </div>
-
+				<p id="values"> you're not working shitty stuff</p>
 				<div class="uk-margin uk-margin-auto-left uk-text-center">
 					<input type="submit" th:value="${article.id} ? 'Modifier' : 'Creer'" class= "uk-button uk-button-primary">
 					<a href="/admin/articles" class="uk-button uk-button-danger">Retour en arriere</a>
 				</div>
-			
-		</form>
+			</form>
+		</main>
+
 		
 	</body>
 	<div th:replace="fragment/layout.html :: scripts"></div>
+	<script>
+		const realFileBtn = document.getElementById("banner");
+		const customBtn = document.getElementById("button");
+		const customTxt = document.getElementById("custom-text");
+	
+		customBtn.addEventListener("click", function() {
+		  realFileBtn.click();
+		});
+	
+		realFileBtn.addEventListener("change", function() {
+		  if (realFileBtn.value) {
+		    customTxt.innerHTML = realFileBtn.value.match(
+		      /[\/\\]([\w\d\s\.\-\(\)]+)$/
+		    )[1];
+		  } else {
+		    customTxt.innerHTML = "No file chosen, yet.";
+		  }
+		});
+	</script>
 </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
 	<head th:replace="fragment/adminLayout.html :: head(~{::title})">
-		<title>Supreme Otter | Manage Genders</title>
+		<title>Project Titan | Manage Genders</title>
 	</head>
 	<body class="">
 		<div th:replace="fragment/adminLayout.html :: header"> </div>
 		
-		<section class="content uk-container">
+		<main class="content uk-container">
 			<h1 class="uk-text-large">Gestion des Genres</h1>
 			
 			<div th:replace="fragment/adminLayout.html :: message"> </div>
@@ -46,7 +46,7 @@
 				  	</tr>
 				</tbody>
 			</table>
-		</section>
+		</main>
 		
 		
 	</body>
