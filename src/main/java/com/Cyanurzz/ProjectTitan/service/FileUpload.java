@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+
 @Service
 public class FileUpload {
 	
@@ -34,12 +35,12 @@ public class FileUpload {
 		Path path = null;
 		try {
 			byte[] bytes = file.getBytes();
-			path = Paths.get(baseDir + File.separator + uploadDir + File.separator + pictureDir + File.separator + dir + File.separator + fileName + getExtension(file.getOriginalFilename()));
+			path = Paths.get(baseDir + File.separator + uploadDir + File.separator + fileName + getExtension(file.getOriginalFilename()));
 			Files.write(path, bytes).toFile();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		return File.separator + uploadDir + File.separator + pictureDir + File.separator + dir + File.separator + fileName + getExtension(file.getOriginalFilename());
+		return File.separator + uploadDir + File.separator + fileName + getExtension(file.getOriginalFilename());
 	}
 	
 	public void deleteFile(String file) {
@@ -55,7 +56,7 @@ public class FileUpload {
 		if (!file.contains(defaultImage)){
 			deleteFile(file);
 		}
-		return File.separator + uploadDir + File.separator + pictureDir + File.separator + dir + File.separator + defaultImage;
+		return File.separator + uploadDir + File.separator + defaultImage;
 	}
 	
 }
