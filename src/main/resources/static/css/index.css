@@ -1,0 +1,28 @@
+:root {
+  --main-bg: rgb(13, 20, 64);
+  --main-txt: whitesmoke;
+  --main-red: rgb(191, 23, 54);
+  --main-blue3: rgb(14, 39, 115);
+  --main-blue2: rgb(20, 56, 166);
+  --main-blue1: rgb(20, 85, 217);
+}
+
+ul {
+	list-style:none;
+	display:flex;
+}
+
+.articles{
+	display: grid;
+  	grid-template-columns: repeat(3, 2fr);
+  	padding:0;
+}
+
+.uk-card {
+  max-width: 30vw;
+  align-self: center;
+  justify-self: center;
+  margin-top:10pt;
+  
+
+}

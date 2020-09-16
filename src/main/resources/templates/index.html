@@ -1,29 +1,132 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
-	<head th:replace="fragment/layout.html :: head(~{::title},~{},~{},~{::description})">
+	<head th:replace="fragment/layout.html :: head(~{::title},~{::link},~{},~{::description})">
 		<title>Project Titan | Home</title>
+		<link rel="stylesheet" th:href="@{/css/index.css}" />
 		<meta name="description" content="">
 	</head>
 	<body class="">
 		<header th:replace="fragment/layout.html :: header"></header>
 		<main class="">
-		<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="animation: push">
-
-    <ul class="uk-slideshow-items">
-        <li>
-            <iframe src="https://www.youtube.com/embed/UjzErwYntFs" width="1920" height="1080" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen uk-cover></iframe>
-        </li>
-        <li>
-            <iframe src="https://www.youtube.com/embed/kopoLzvh5jY" width="1920" height="1080" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen uk-cover></iframe>
-        </li>
-    </ul>
-
-    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-
-</div>
+			<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="animation: push">
+			
+			    <ul class="uk-slideshow-items ">
+			        <li class="">
+			            <iframe src="https://www.youtube.com/embed/UjzErwYntFs" width="1920" height="1080" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen uk-cover></iframe>
+			            <div class="uk-position-large uk-position-bottom-left uk-overlay uk-overlay-primary">
+			            	<h1 class="title-main">Blobfish for breakfast</h1>
+			            	<p class="subtitle">Disponible le 5 Aout</p>
+			            	<div class="uk-flex">
+			            		<button class="uk-button uk-button-default uk-margin-right">Visiter la page</button>
+    							<button class="uk-button uk-button-primary">Acheter ou Précommander</button>
+			            	</div>
+			            </div>
+			        </li>
+			        <li>
+			            <iframe src="https://www.youtube.com/embed/kopoLzvh5jY" width="1920" height="1080" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen uk-cover></iframe>
+			        </li>
+			    </ul>
+			
+			    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+			    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+			
+			</div>
+			<h2 class="uk-heading-line uk-text-center"><span>Dernières Nouvelles & Actualités</span></h2>
+			<ul class="uk-width-1-1 uk-flex uk-flex-center">
+				<li><a class="uk-margin-right uk-button uk-button-text">All</a></li>
+				<li><a class="uk-margin-right uk-button uk-button-text">Supreme Otter</a></li>
+				<li><a class="uk-margin-right uk-button uk-button-text">Blobfish fish for Breakfast</a></li>
+			</ul>
+			
+			    <div class="articles ">
+			        <div class="uk-card uk-card-default">
+			        	<div class="uk-card-badge uk-label">New</div>
+			            <div class="uk-card-media-top">
+			                <img src="https://c3d3y8n7.rocketcdn.me/wp-content/uploads/WoW/LT/Shadowlands/Vignettes/wow-world-of-warcraft-shadowlands-blizzcon-2019-recap-info-extension-vignette.jpg" alt="">
+			            </div>
+			            <div class="uk-card-body">
+			                <h3 class="uk-card-title">Media Top</h3>
+			                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+			           		<p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+			            </div>
+			            <div class="uk-card-footer">
+					        <a href="#" class="uk-button uk-button-text">En savoirs plus ...</a>
+					    </div>
+			        </div>
+			        <div class="uk-card uk-card-default">
+			        	<div class="uk-card-badge uk-label">New</div>
+			            <div class="uk-card-media-top">
+			                <img src="https://c3d3y8n7.rocketcdn.me/wp-content/uploads/WoW/LT/Shadowlands/Vignettes/wow-world-of-warcraft-shadowlands-blizzcon-2019-recap-info-extension-vignette.jpg" alt="">
+			            </div>
+			            <div class="uk-card-body">
+			                <h3 class="uk-card-title">Media Top</h3>
+			                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+			           		<p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+			            </div>
+			            <div class="uk-card-footer">
+					        <a href="#" class="uk-button uk-button-text">En savoirs plus ...</a>
+					    </div>
+			        </div>
+			        <div class="uk-card uk-card-default">
+			        	<div class="uk-card-badge uk-label">New</div>
+			            <div class="uk-card-media-top">
+			                <img src="https://c3d3y8n7.rocketcdn.me/wp-content/uploads/WoW/LT/Shadowlands/Vignettes/wow-world-of-warcraft-shadowlands-blizzcon-2019-recap-info-extension-vignette.jpg" alt="">
+			            </div>
+			            <div class="uk-card-body">
+			                <h3 class="uk-card-title">Media Top</h3>
+			                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+			           		<p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+			            </div>
+			            <div class="uk-card-footer">
+					        <a href="#" class="uk-button uk-button-text">En savoirs plus ...</a>
+					    </div>
+			        </div>
+			        <div class="uk-card uk-card-default">
+			        	<div class="uk-card-badge uk-label">New</div>
+			            <div class="uk-card-media-top">
+			                <img src="https://c3d3y8n7.rocketcdn.me/wp-content/uploads/WoW/LT/Shadowlands/Vignettes/wow-world-of-warcraft-shadowlands-blizzcon-2019-recap-info-extension-vignette.jpg" alt="">
+			            </div>
+			            <div class="uk-card-body">
+			                <h3 class="uk-card-title">Media Top</h3>
+			                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+			           		<p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+			            </div>
+			            <div class="uk-card-footer">
+					        <a href="#" class="uk-button uk-button-text">En savoirs plus ...</a>
+					    </div>
+			        </div>
+			        <div class="uk-card uk-card-default">
+			        	<div class="uk-card-badge uk-label">New</div>
+			            <div class="uk-card-media-top">
+			                <img src="https://c3d3y8n7.rocketcdn.me/wp-content/uploads/WoW/LT/Shadowlands/Vignettes/wow-world-of-warcraft-shadowlands-blizzcon-2019-recap-info-extension-vignette.jpg" alt="">
+			            </div>
+			            <div class="uk-card-body">
+			                <h3 class="uk-card-title">Media Top</h3>
+			                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+			           		<p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+			            </div>
+			            <div class="uk-card-footer">
+					        <a href="#" class="uk-button uk-button-text">En savoirs plus ...</a>
+					    </div>
+			        </div>
+			        <div class="uk-card uk-card-default">
+			        	<div class="uk-card-badge uk-label">New</div>
+			            <div class="uk-card-media-top">
+			                <img src="https://c3d3y8n7.rocketcdn.me/wp-content/uploads/WoW/LT/Shadowlands/Vignettes/wow-world-of-warcraft-shadowlands-blizzcon-2019-recap-info-extension-vignette.jpg" alt="">
+			            </div>
+			            <div class="uk-card-body">
+			                <h3 class="uk-card-title">Media Top</h3>
+			                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+			           		<p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+			            </div>
+			            <div class="uk-card-footer">
+					        <a href="#" class="uk-button uk-button-text">En savoirs plus ...</a>
+					    </div>
+			        </div>
+			    </div>
+			<h2 class="uk-heading-line uk-text-center"><span>Communauté</span></h2>
 		</main>
-		<footer>
+		<footer th:replace="fragment/layout.html :: footer">
 		
 		</footer>
 	</body>

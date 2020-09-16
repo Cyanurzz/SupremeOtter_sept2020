@@ -1,0 +1,17 @@
+.footer{
+	display: grid;
+  	grid-template-columns: repeat(3, 1fr);
+  	padding:0;
+}
+.footer > div {
+  max-width: 30vw;
+  align-self: center;
+  justify-self: center;
+}
+
+.list-social-icons{
+    display: grid;
+  	grid-template-columns: repeat(5, 1fr);
+  	padding:0;
+  	width:100%;
+}

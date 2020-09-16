@@ -8,6 +8,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 		<!-- UIkit CSS -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css" />
+		<link rel="stylesheet" th:href="@{/css/layout.css}" />
 		<th:block th:replace="${links}">
 		<th:block th:replace="${scripts}">
 	</head>
@@ -41,8 +42,26 @@
 	</header>
 
 	<footer th:fragment="">
-		
-		</footer>
+		<nav class="uk-navbar-container footer" uk-navbar>
+			<div>
+				<p class="title-footer">Rejoignez nous sur :</p>
+				<ul class="list-social-icons">
+					<li><a href="#"><span class="social-icon" uk-icon="icon: facebook; ratio: 1.5"></span></a></li>
+					<li><a href="#"><span class="social-icon" uk-icon="icon: twitter; ratio: 1.5"></span> </a></li>
+					<li><a href="#"><span class="social-icon" uk-icon="icon: instagram; ratio: 1.5"></span> </a></li>
+					<li><a href="#"><span class="social-icon" uk-icon="icon: youtube; ratio: 1.5"></span> </a></li>
+					<li><a href="#"><span class="social-icon" uk-icon="icon: linkedin; ratio: 1.5"></span> </a></li>
+					
+				</ul>
+			</div>
+			<div>
+			
+			</div>
+			<div>
+			
+			</div>
+		</nav>
+	</footer>
 	</body>
 	<div th:fragment="scripts">
 		<!-- UIkit JS -->
