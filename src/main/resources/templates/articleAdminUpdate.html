@@ -9,19 +9,16 @@
 			<h1 class="uk-text-large"  th:text="${article.id} ? 'Page de Modifications' : 'Page de Creation'"> </h1>
 			<div th:replace="fragment/adminLayout.html :: message"> </div>
 			
-			<form method="post" th:action="@{/admin/articles/update}" th:object="${article}" class="uk-grid-small uk-form" enctype="multipart/form-data" uk-grid>
+			<form method="post" th:action="@{/admin/articles/update}" th:object="${article}" class="uk-grid-small uk-form" uk-grid>
 				<input name="id" th:field="*{id}" type="hidden">
 			    <div class="uk-width-1-1">
 			        <label class="uk-form-label" for="title">Titre de l'article *</label> 
 					<input id="title" name="title" placeholder="Note de Maj super smash bros" th:field="*{title}" type="text" class="uk-input uk-form-large uk-width">
 					<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="uk-alert-danger" uk-alert></div>
 			    </div>
-				<div class="js-upload" uk-form-custom>
-					<label class="uk-form-label" for="banner">Banni�re : </label> 
-				    <input type="file" th:field="*{banner}" id="banner">
-				    <button class="uk-button uk-button-default" id="button" type="button" tabindex="-1">Select</button>
-				    <span id="custom-text">No file chosen, yet.</span>
-				    
+				<div class="" uk-form-custom>
+					<label class="uk-form-label" for="banner">Bannière : </label> 
+				    <input name="banner" type="input" th:field="*{banner}" id="banner" class="uk-input uk-form-large uk-width">
 				</div>
         		<div class="uk-width-1-1 uk-card uk-card-default uk-card-body uk-child-width-auto uk-card-hover">
         			<p>tags *</p>
