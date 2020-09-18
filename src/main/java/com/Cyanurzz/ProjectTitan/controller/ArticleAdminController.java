@@ -2,13 +2,11 @@ package com.Cyanurzz.ProjectTitan.controller;
 
 import java.security.Principal;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,12 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Cyanurzz.ProjectTitan.entity.Article;
-import com.Cyanurzz.ProjectTitan.entity.Game;
-import com.Cyanurzz.ProjectTitan.entity.Tag;
 import com.Cyanurzz.ProjectTitan.repository.ArticleRepository;
 import com.Cyanurzz.ProjectTitan.repository.TagRepository;
 import com.Cyanurzz.ProjectTitan.repository.UserRepository;
@@ -57,14 +52,16 @@ public class ArticleAdminController {
 			}
 		}
 		
+		
 		model.addAttribute("article", article);
 		model.addAttribute("tags", tagRepository.findAll());
+		model.addAttribute("tagsKeyGame", tagRepository.findAllByKey("GAME"));
 		
 		return "articleAdminUpdate";
 	}
 	
 	@PostMapping("/update")
-	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid  Article article, BindingResult bindingResult) {
+	public String create(RedirectAttributes redirAttrs, Model model, @RequestParam(required = false) Integer id, @Valid  Article article, BindingResult bindingResult, Principal principal) {
 		
 
 		if( id == null) {
@@ -74,7 +71,7 @@ public class ArticleAdminController {
 		}
 	    Date date = new Date();  
 
-	    article.setAuthor(userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+	    article.setAuthor(userRepository.findByUsername(principal.getName()));
 	    article.setReleaseDate(date);
 
 		

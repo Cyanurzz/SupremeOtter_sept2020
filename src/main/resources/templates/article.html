@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+	<head th:replace="fragment/layout.html :: head(~{::title},~{::link},~{},~{::description})">
+		<title th:text="|Project Titan : ${article.title}|"></title>
+		<link rel="stylesheet" th:href="@{/css/index.css}" />
+		<meta name="description" content="">
+	</head>
+	<body class="">
+		<header th:replace="fragment/layout.html :: header"></header>
+		<main class="uk-container">
+			<img th:src="${article.banner}">
+			<h1 th:text="${article.title}"></h1>
+			
+			<section class="uk-container">
+				<p th:text="${article.content}"></p>
+			</section>
+		</main>
+		<footer th:replace="fragment/layout.html :: footer">
+		
+		</footer>
+	</body>
+	<div th:replace="fragment/layout.html :: scripts"></div>
+</html>

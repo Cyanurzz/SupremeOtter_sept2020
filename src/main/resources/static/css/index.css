@@ -7,6 +7,11 @@
   --main-blue1: rgb(20, 85, 217);
 }
 
+li{
+	padding:0;
+	margin:0;
+}
+
 ul {
 	list-style:none;
 	display:flex;
@@ -17,12 +22,13 @@ ul {
   	grid-template-columns: repeat(3, 2fr);
   	padding:0;
 }
+.articles > li{
+	margin: 0 auto;
+}
 
 .uk-card {
   max-width: 30vw;
-  align-self: center;
-  justify-self: center;
   margin-top:10pt;
-  
 
 }
+

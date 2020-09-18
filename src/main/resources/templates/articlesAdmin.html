@@ -18,7 +18,6 @@
 			            <th>Auteur</th>
 			            <th>Banniere</th>
 			            <th>Date de Sortie</th>
-			            <th>Contenu</th>
 			            <th>Tags</th>
 			            <th></th>  
 			        </tr>
@@ -27,10 +26,9 @@
 			        <tr th:each="article : ${articles}">
 			            <td th:text="${article.id}"></td>
 			            <td th:text="${article.title}">Table Data</td>
-			            <td th:text="| ${article.author}|"></td>
+			            <td th:text="| ${article.author.username}|"></td>
 			            <td><img th:data-src="${article.banner}" width="150" th:alt="|visuel ${article.title}|" uk-img></td> 
 			            <td th:text="${#dates.format(article.releaseDate,'dd MMM yyyy')}">Table Data</td>
-			            <td th:text="| ${article.content}|"></td>
 			            <td>
 			            	<ul>
 			            		<li th:each="tag: ${article.tags}" th:text="${tag.name}"></li>

@@ -27,11 +27,11 @@
 				        <tr th:each="platform : ${platforms}">
 				            <td th:text="${platform.id}"></td>
 				            <td th:text="${platform.name}">Table Data</td>
-				            <td><img th:data-src="${platform.img}" width="150" th:alt="|visuel ${platform.name}|" uk-img></td>
+				            <td><img th:data-src="${platform.img}" width="50" th:alt="|visuel ${platform.name}|" uk-img></td>
 				            <td>
 				            	<ul class="uk-iconnav uk-iconnav-vertical">
 				            		<li><a th:href="@{/admin/platforms(id=${platform.id})}" uk-icon="icon: file-edit"></a></li>
-				            		<li><a th:href="@{/admin/platforms/delete(id=${platform.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer cete platforme ?')" uk-icon="icon: trash"></a></li>
+				            		<li><a th:href="@{/admin/platforms/delete(id=${platform.id})}" onclick="return confirm('Etes vous sï¿½r de vouloir supprimer cete platforme ?')" uk-icon="icon: trash"></a></li>
 				            	</ul>
 				            </td>
 				        </tr>

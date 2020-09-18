@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,20 +27,24 @@ public class Article {
 	
 	private String title;
 	
+	@Column(columnDefinition = "TEXT")
 	private String content;
 	
+	@Size(max = 4000)
 	private String banner;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date releaseDate;
 	
 	@ManyToOne
-	@JoinColumn(name="user_id", insertable = false, updatable = false, nullable=true)
+	@JoinColumn(name="user_id", updatable = false)
 	private User author;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "tag_article", joinColumns = @JoinColumn(name = "article_id") , inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	private List<Tag> tags;
+	
+	private String category;
 
 	
 	public Article() {
@@ -99,6 +105,14 @@ public class Article {
 
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	

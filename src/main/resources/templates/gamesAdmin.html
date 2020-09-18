@@ -16,9 +16,7 @@
 			        <tr>
 			            <th class="uk-table-shrink">id</th>
 			            <th>Titre</th>
-			            <th>Banniere</th>
-			            <th>Date de Sortie</th>
-			            <th>Classification</th>
+			            <th class="uk-table-shrink">Classification</th>
 			            <th>Descripteurs</th>
 			            <th>Gender</th>
 			            <th>Platformes</th>
@@ -30,9 +28,6 @@
 			        <tr th:each="game : ${games}">
 			            <td th:text="${game.id}"></td>
 			            <td th:text="${game.title}">Table Data</td>
-			            <td></td>
-			            <!-- <td><img th:data-src="${article.picture}" width="150" th:alt="|visuel ${article.title}|" uk-img></td> -->
-			            <td th:text="${#dates.format(game.releaseDate,'dd MMM yyyy')}">Table Data</td>
 			            <td th:text="| ${game.classification} +|"></td>
 			             <td>
 			             	<ul>
@@ -46,15 +41,14 @@
 			            <td>
 			            	<ul>
 			            		<li th:each="platform: ${game.platforms}">
-			            			<p th:text="${platform.name}"></p>
-			            			<img th:data-src="${platform.img}" height="87px" width="100px" th:alt="|available on ${platform.name}|">
+			            			<img th:src="${platform.img}"  width="20px" th:alt="|available on ${platform.name}|">
 			            		</li>
 			            	</ul>
 			            </td>
 			            <td>
 			            	<ul class="uk-iconnav uk-iconnav-vertical">
-			            		<li><a th:href="@{/admin/games/update(id=${game.id})}" uk-icon="icon: file-edit"></a></li>
-			            		<li><a th:href="@{/admin/games/delete(id=${game.id})}" onclick="return confirm('Etes vous sûr de vouloir supprimer ce jeux ?')" uk-icon="icon: trash"></a></li>
+			            		<li><a th:href="@{/admin/games/update(id=${game.id})}" uk-icon="icon: file-edit; ratio:1"></a></li>
+			            		<li><a th:href="@{/admin/games/delete(id=${game.id})}" onclick="return confirm('Etes vous sï¿½r de vouloir supprimer ce jeux ?')" uk-icon="icon: trash"></a></li>
 			            	</ul>
 			            </td>
 			        </tr>

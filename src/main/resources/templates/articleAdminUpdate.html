@@ -16,10 +16,20 @@
 					<input id="title" name="title" placeholder="Note de Maj super smash bros" th:field="*{title}" type="text" class="uk-input uk-form-large uk-width">
 					<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="uk-alert-danger" uk-alert></div>
 			    </div>
-				<div class="" uk-form-custom>
+				<div class="uk-width-1-2" uk-form-custom>
 					<label class="uk-form-label" for="banner">Bannière : </label> 
 				    <input name="banner" type="input" th:field="*{banner}" id="banner" class="uk-input uk-form-large uk-width">
 				</div>
+				<div class="uk-width-1-2">
+			        <label class="uk-form-label" for="form-stacked-select">Category</label>
+			        <div class="uk-form-controls">
+			            <select th:field="*{category}" class="uk-select" id="form-stacked-select">
+			                <option th:value=null></option>
+			                <option th:value="PROJECT_TITAN">Projet Titan</option>
+			                <option th:each="tag: ${tagsKeyGame}" th:value="${tag.name}" th:text="${tag.name}"></option>
+			            </select>
+			        </div>
+			    </div>
         		<div class="uk-width-1-1 uk-card uk-card-default uk-card-body uk-child-width-auto uk-card-hover">
         			<p>tags *</p>
         			<ul class=" uk-grid-small uk-grid uk-child-width-auto">
@@ -45,23 +55,4 @@
 		
 	</body>
 	<div th:replace="fragment/layout.html :: scripts"></div>
-	<script>
-		const file = document.getElementById("banner");
-		const uploadBtn = document.getElementById("button");
-		const customTxt = document.getElementById("custom-text");
-	
-		uploadBtn.addEventListener("click", function() {
-		  file.click();
-		});
-	
-		file.addEventListener("change", function() {
-		  if (file.value) {
-		    customTxt.innerHTML = file.value.match(
-		      /[\/\\]([\w\d\s\.\-\(\)]+)$/
-		    )[1];
-		  } else {
-		    customTxt.innerHTML = "No file chosen, yet.";
-		  }
-		});
-	</script>
 </html>

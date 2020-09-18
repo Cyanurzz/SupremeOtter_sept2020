@@ -33,6 +33,8 @@ public class Game {
 	@NotNull(message="Champs Vide")
 	private String title;
 	
+	private String subtitle;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date releaseDate;
 
@@ -56,6 +58,14 @@ public class Game {
 	
 	private String description;
 	
+	private String banner;
+	
+	private String video;
+	
+	private String logo;
+	
+	private Boolean mainGame;
+	
 	
 	public Game() {
 		super();
@@ -75,6 +85,14 @@ public class Game {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getSubtitle() {
+		return subtitle;
+	}
+
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
 	}
 
 	public Date getReleaseDate() {
@@ -135,6 +153,36 @@ public class Game {
 		this.description = description;
 	}
 
-	
+	public String getBanner() {
+		return banner;
+	}
+
+	public void setBanner(String banner) {
+		this.banner = banner;
+	}
+
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public Boolean getMainGame() {
+		return mainGame;
+	}
+
+	public void setMainGame(Boolean mainGame) {
+		this.mainGame = mainGame;
+	}
 	
 }
