@@ -2,22 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
 	<head th:replace="fragment/layout.html :: head(~{::title},~{::link},~{},~{::description})">
 		<title th:text="|Project Titan : ${article.title}|"></title>
-		<link rel="stylesheet" th:href="@{/css/index.css}" />
+		<link rel="stylesheet" th:href="@{/css/article.css}" />
 		<meta name="description" content="">
 	</head>
 	<body class="">
 		<header th:replace="fragment/layout.html :: header"></header>
-		<main class="uk-container">
-			<img th:src="${article.banner}">
-			<h1 th:text="${article.title}"></h1>
-			
-			<section class="uk-container">
-				<p th:text="${article.content}"></p>
-			</section>
-		</main>
-		<footer th:replace="fragment/layout.html :: footer">
 		
-		</footer>
+		<main>
+			<img th:src="${article.banner}" width=100% th:alt="${article.title}">
+			<section class="uk-container uk-margin">
+				<h1 th:text="${article.title}"></h1>
+				<div class="uk-flex uk-align-center">
+					<p th:text="|publié par ${article.author.username} le ${#dates.format(article.releaseDate,'dd MM yyyy')}|"></p>
+				</div>
+				<p th:text="${article.content}"></p>
+				<div class="tagSection">
+					<ul class="tags">
+						<li><h2 class="tagTitleSection">Tags associé à l'article :</h2></li>
+						<li class="pinTag" th:each="tag: ${article.tags}"><a th:href="@{|/search/${tag.id}|}" th:text="'#'+${tag.name}"></a></li>
+						<li class="pinTag" th:each="gameTag: ${article.game?.tags}"><a th:href="@{|/search/${gameTag.id}|}" th:text="'#'+${gameTag.name}"></a></li>
+					</ul>
+				</div>
+
+			</section>
+			<section>
+				<h2 class="uk-heading-line uk-text-center"><span th:text="${article.game}? |article en rapport avec : ${article.game?.title}| : 'article en rapport avec : Project Titan'"></span></h2>   	
+					<ul class="uk-align-center articles uk-container uk-margin">
+				        <li th:each="article, iter : ${articles}" th:if="${iter.index < 3}" class="">
+							<div class="uk-card uk-card-default ">
+					        	<div class="uk-card-badge uk-label">New</div>
+					            <div class="uk-card-media-top">
+					                <img th:src="${article.banner}" alt="">
+					            </div>
+					            <div class="uk-card-body">
+					                <h3 class="uk-card-title" th:text="${article.title}">Media Top</h3>
+					                <p th:text="${article.content}" class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+					           		<p class="uk-text-meta" th:text="${#dates.format(article.releaseDate,'dd MM yyyy')}"></p>
+					            </div>
+					            <div class="uk-card-footer">
+							        <a th:href="@{|/article/${article.id}|}"class="uk-button uk-button-text">En savoirs plus ...</a>
+							    </div>
+					        </div>
+				        </li>
+				    </ul>
+			</section>
+
+		</main>
+		<footer th:replace="fragment/layout.html :: footer"></footer>
 	</body>
 	<div th:replace="fragment/layout.html :: scripts"></div>
 </html>

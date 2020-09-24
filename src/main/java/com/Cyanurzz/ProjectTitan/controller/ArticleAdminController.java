@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Cyanurzz.ProjectTitan.entity.Article;
 import com.Cyanurzz.ProjectTitan.repository.ArticleRepository;
+import com.Cyanurzz.ProjectTitan.repository.GameRepository;
 import com.Cyanurzz.ProjectTitan.repository.TagRepository;
 import com.Cyanurzz.ProjectTitan.repository.UserRepository;
 
@@ -33,6 +34,9 @@ public class ArticleAdminController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private GameRepository	gameRepository;
 	
 	@GetMapping
 	public String toArticlesAdmin(Model model) {
@@ -54,8 +58,8 @@ public class ArticleAdminController {
 		
 		
 		model.addAttribute("article", article);
+		model.addAttribute("games", gameRepository.findAll());
 		model.addAttribute("tags", tagRepository.findAll());
-		model.addAttribute("tagsKeyGame", tagRepository.findAllByKey("GAME"));
 		
 		return "articleAdminUpdate";
 	}

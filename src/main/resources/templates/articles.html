@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
+	<head th:replace="fragment/layout.html :: head(~{::title},~{::link},~{},~{::description})">
+		<title>Project Titan | Home</title>
+		<link rel="stylesheet" th:href="@{/css/index.css}" />
+		<meta name="description" content="">
+	</head>
+	<body class="">
+		<header th:replace="fragment/layout.html :: header"></header>
+	<main class="">
+		<ul class="js-filter uk-align-center articles list">
+			<li th:each="article, iter : ${articles}" class="">
+				<div class="uk-card uk-card-default ">
+					<div class="uk-card-badge uk-label">New</div>
+					<div class="uk-card-media-top">
+						<img th:src="${article.banner}" alt="">
+					</div>
+					<div class="uk-card-body">
+						<h3 class="uk-card-title" th:text="${article.title}"></h3>
+						<p th:text="${article.content}" class="uk-text-truncate"></p>
+						<p class="uk-text-meta" th:text="${#dates.format(article.releaseDate,'dd MM yyyy')}"></p>
+					</div>
+					<div class="uk-card-footer">
+						<a th:href="@{|/article/${article.id}|}" class="uk-button uk-button-text">En savoirs plus ...</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</main>
+	<footer th:replace="fragment/layout.html :: footer">
+		
+		</footer>
+	</body>
+	<div th:replace="fragment/layout.html :: scripts"></div>
+</html>

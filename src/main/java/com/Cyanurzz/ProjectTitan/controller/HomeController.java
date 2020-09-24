@@ -23,7 +23,7 @@ public class HomeController {
 		
 		model.addAttribute("games", gameRepository.findAll());
 		model.addAttribute("mainGames", gameRepository.retrieveMainGame());
-		model.addAttribute("articles", articleRepository.findAll());
+		model.addAttribute("articles", articleRepository.findArticleMain());
 		return "index";
 	}
 

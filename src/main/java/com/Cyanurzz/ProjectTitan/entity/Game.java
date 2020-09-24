@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -55,6 +56,10 @@ public class Game {
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "descriptors_game", joinColumns = @JoinColumn(name = "game_id") , inverseJoinColumns = @JoinColumn(name = "descriptor_id"))
 	List<Descriptor> descriptors = new ArrayList<>();
+	
+	@OneToMany(mappedBy="game")
+	private List<Article> Articles;
+
 	
 	private String description;
 	
@@ -143,6 +148,14 @@ public class Game {
 
 	public void setDescriptors(List<Descriptor> descriptors) {
 		this.descriptors = descriptors;
+	}
+
+	public List<Article> getArticles() {
+		return Articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		Articles = articles;
 	}
 
 	public String getDescription() {

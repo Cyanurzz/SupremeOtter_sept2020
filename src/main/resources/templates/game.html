@@ -1,11 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fr">
-	<head th:replace="fragment/layout.html :: head(~{::title},~{::description},~{},~{})">
-		<title>Project Titan | Home</title>
+	<head th:replace="fragment/layout.html :: head(~{::title},~{::link},~{},~{::description})">
+		<title th:text="|Project Titan : ${game.title}|"></title>
+		<link rel="stylesheet" th:href="@{/css/article.css}" />
 		<meta name="description" content="">
 	</head>
-	<body class="container">
-		<header th:replace="fragment/layout.htm :: header"></header>
+	<body class="">
+		<header th:replace="fragment/layout.html :: header"></header>
+		
+		<main>
+			<img th:src="${game.banner}" width=100% th:alt="${game.title}">
+			<section class="uk-container uk-margin">
+				<h1 th:text="${game.title}"></h1>
+				<p th:text="${game.description}"></p>
+				<div class="tagSection">
+					<ul class="tags">
+						<li><h2 class="tagTitleSection">Tags associé aux jeux :</h2></li>
+						<li class="pinTag" th:each="tag: ${game.tags}"><a th:href="@{|/search/${tag.id}|}" th:text="'#'+${tag.name}"></a></li>
+					</ul>
+				</div>
+
+			</section>
+			<section>
+				<h2 class="uk-heading-line uk-text-center"><span th:text="|article en rapport avec : ${game?.title}|"></span></h2>
+					<ul class="uk-align-center articles uk-container uk-margin">
+				        <li th:each="article, iter : ${articles}" th:if="${iter.index < 3}" class="">
+							<div class="uk-card uk-card-default ">
+					        	<div class="uk-card-badge uk-label">New</div>
+					            <div class="uk-card-media-top">
+					                <img th:src="${article.banner}" alt="">
+					            </div>
+					            <div class="uk-card-body">
+					                <h3 class="uk-card-title" th:text="${article.title}">Media Top</h3>
+					                <p th:text="${article.content}" class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+					           		<p class="uk-text-meta" th:text="${#dates.format(article.releaseDate,'dd MM yyyy')}"></p>
+					            </div>
+					            <div class="uk-card-footer">
+							        <a th:href="@{|/article/${article.id}|}"class="uk-button uk-button-text">En savoirs plus ...</a>
+							    </div>
+					        </div>
+				        </li>
+				    </ul>
+			</section>
+
+		</main>
+		<footer th:replace="fragment/layout.html :: footer"></footer>
 	</body>
 	<div th:replace="fragment/layout.html :: scripts"></div>
 </html>

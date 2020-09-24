@@ -40,11 +40,13 @@ public class Article {
 	@JoinColumn(name="user_id", updatable = false)
 	private User author;
 	
+	@ManyToOne
+	@JoinColumn(name="game_id", updatable = false, nullable = true)
+	private Game game;
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "tag_article", joinColumns = @JoinColumn(name = "article_id") , inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	private List<Tag> tags;
-	
-	private String category;
 
 	
 	public Article() {
@@ -99,20 +101,20 @@ public class Article {
 		this.author = author;
 	}
 
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
 	public List<Tag> getTags() {
 		return tags;
 	}
 
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
 	}
 	
 	

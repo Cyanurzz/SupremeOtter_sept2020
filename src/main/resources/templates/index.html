@@ -11,7 +11,7 @@
 			<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="animation: push">
 			
 			    <ul  class="uk-slideshow-items ">
-			        <li th:each="game, iter : ${mainGames}" th:id="|p${iter.index}|" class="">
+			        <li th:each="game, iter : ${mainGames}" th:id="|${iter.index}|" class="">
 			            <iframe th:src="${game.video}" width="1920" height="1080" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen uk-cover></iframe>
 			            <div class="uk-position-large uk-position-bottom-left uk-overlay uk-overlay-primary">
 			            	<img th:if="${game.logo}" th:src="${game.logo}" width=400px class="uk-align-center">
@@ -19,7 +19,23 @@
 			            	<p th:text="${game.subtitle}" class="subtitle"></p>
 			            	<p th:text="${game.releaseDate.before(#dates.createNow())}? |Disponible depuis le ${#dates.format(game.releaseDate,'dd MM yyyy')}| : |Disponible le ${#dates.format(game.releaseDate,'dd MM yyyy')}|"></p>
 			            	<div class="uk-flex">
-			            		<button class="uk-button uk-button-default uk-margin-right">Visiter la page</button>
+			            		<a th:if="${game.classification < 16} " th:href="@{|/game/${game.id}|}" class="uk-button uk-button-default uk-margin-right">Visiter la page</a>
+			            		<a th:if="${game.classification > 16} " class="uk-button uk-button-default uk-margin-right" href="#modal-sections" uk-toggle>Visiter la page</a>
+								<div id="modal-sections" uk-modal>
+								    <div class="uk-modal-dialog">
+								        <button class="uk-modal-close-default" type="button" uk-close></button>
+								        <div class="uk-modal-header">
+								            <h2 class="uk-modal-title">Etes vous sur de vouloir continué ?</h2>
+								        </div>
+								        <div class="uk-modal-body">
+								            <p th:text="|Cette page est déconseillé aux moins de ${game.classification} ans.|"></p>
+								        </div>
+								        <div class="uk-modal-footer uk-text-right">
+								            <button class="uk-button uk-button-default uk-modal-close" type="button">Non</button>
+								            <a class="uk-button uk-button-primary" th:href="@{|/game/${game.id}|}">Oui</a>
+								        </div>
+								    </div>
+								</div>
     							<button th:text="${game.releaseDate.before(#dates.createNow())}? 'Acheter':'Precommander'" class="uk-button uk-button-primary"></button>
 			            	</div>
 			            </div>
@@ -34,15 +50,15 @@
 			
 			<div class="">
 				<div uk-filter="target: .js-filter">
-				    <ul class="uk-flex uk-flex-center">
+				    <ul class="uk-flex uk-flex-center list">
 				    	<li uk-filter-control><a class="uk-active uk-margin-right uk-button uk-button-text" href="#">Tout</a></li>
 				        <li uk-filter-control=".PROJECT_TITAN"><a class="uk-margin-right uk-button uk-button-text" href="#">Supreme Otter</a></li>
-				        <li uk-filter-control=".blobfish"><a class="uk-margin-right uk-button uk-button-text" href="#">Blobfish for Breakfast</a></li>
-				        <li uk-filter-control=".hitlama"><a class="uk-margin-right uk-button uk-button-text" href="#">Hitlama</a></li>
+				        <li uk-filter-control=".BlobFish"><a class="uk-margin-right uk-button uk-button-text" href="#">Blobfish for Breakfast</a></li>
+				        <li uk-filter-control=".HitLama"><a class="uk-margin-right uk-button uk-button-text" href="#">Hitlama</a></li>
 				    </ul>
 				
-				    <ul class="js-filter uk-align-center articles">
-				        <li th:each="article : ${articles}" class="" th:class="${article.category}">
+				    <ul class="js-filter uk-align-center articles list">
+				        <li th:each="article, iter : ${articles}" class="" th:class="${article.game}? ${article.game.title} : PROJECT_TITAN" th:if="${iter.index < 6}">
 							<div class="uk-card uk-card-default ">
 					        	<div class="uk-card-badge uk-label">New</div>
 					            <div class="uk-card-media-top">
@@ -51,7 +67,7 @@
 					            <div class="uk-card-body">
 					                <h3 class="uk-card-title" th:text="${article.title}">Media Top</h3>
 					                <p th:text="${article.content}" class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-					           		<p class="uk-text-meta uk-margin-remove-top"><time th:datetime="${article.releaseDate}"></time></p>
+					           		<p class="uk-text-meta" th:text="${#dates.format(article.releaseDate,'dd MM yyyy')}"></p>
 					            </div>
 					            <div class="uk-card-footer">
 							        <a th:href="@{|/article/${article.id}|}"class="uk-button uk-button-text">En savoirs plus ...</a>

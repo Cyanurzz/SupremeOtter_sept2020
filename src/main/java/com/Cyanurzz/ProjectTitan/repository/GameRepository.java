@@ -18,4 +18,5 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 	
 	@Query("SELECT g FROM  Game g WHERE g.mainGame = true")
 	List<Game> retrieveMainGame();
+	
 }

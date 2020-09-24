@@ -18,15 +18,14 @@
 			    </div>
 				<div class="uk-width-1-2" uk-form-custom>
 					<label class="uk-form-label" for="banner">Bannière : </label> 
-				    <input name="banner" type="input" th:field="*{banner}" id="banner" class="uk-input uk-form-large uk-width">
+				    <input name="banner" type="text" th:field="*{banner}" id="banner" class="uk-input uk-form-large uk-width">
 				</div>
 				<div class="uk-width-1-2">
 			        <label class="uk-form-label" for="form-stacked-select">Category</label>
 			        <div class="uk-form-controls">
-			            <select th:field="*{category}" class="uk-select" id="form-stacked-select">
+			            <select th:field="*{game}" class="uk-select" id="form-stacked-select">
 			                <option th:value=null></option>
-			                <option th:value="PROJECT_TITAN">Projet Titan</option>
-			                <option th:each="tag: ${tagsKeyGame}" th:value="${tag.name}" th:text="${tag.name}"></option>
+			                <option th:each="game: ${games}" th:value="${game.id}" th:text="${game.title}"></option>
 			            </select>
 			        </div>
 			    </div>
